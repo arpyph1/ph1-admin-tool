@@ -1,0 +1,9 @@
+.template-page-common .list-generic li {
+  font-size: 1.125rem;
+  font-weight: 200;
+  line-height: 1.8;
+}
+
+.template-page-common a {
+  color: var(--color-highlight-secondary)_v2;
+}

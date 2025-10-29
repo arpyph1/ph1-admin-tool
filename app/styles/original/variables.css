@@ -1,0 +1,45 @@
+:root {
+  /* COLORS */
+  --color-primary: #3b3b3b;
+  --color-secondary: #272727;
+  --color-tertiary: #ffc72d;
+
+  --color-highlight-primary: #ff402c;
+  --color-highlight-secondary: #51bddc;
+  --color-highlight-secondary-v2: #2baae2;
+
+  --color-secondary-active: #171717;
+  --color-highlight-primary-active: #e82c18;
+
+  --color-grey: #f5f5f5;
+  --color-grey-v2: #7a7a7a;
+  --color-light-grey: #d9d9d9;
+  --color-light-v2-grey: #f5f5f6;
+
+  --text-color: #555555;
+
+  /* HEADER SPECIFIC */
+  --header-height: 3.5rem;
+  --header-index: 100;
+
+  /* BREAK POINTS */
+  --mobile-brake-p: 680px;
+  
+  --bp-xxxsm: 400px;
+  --bp-xxsm: 460px;
+  --bp-xsm: 500px;
+  --bp-xsm-sm: 540px;
+  --bp-sm: 640px;
+  --bp-sm-md: 700px;
+  --bp-md: 768px;
+  --bp-md-md: 800px;
+  --bp-md-lg: 870px;
+  --bp-lg: 960px;
+  --bp-xlg: 1024px;
+  --bp-xlg-xxlg: 1100px;
+  --bp-xxlg: 1200px;
+
+  /* OTHERS */
+  --initial-section-height: 41rem;
+  --svg-banner-index: -2;
+}

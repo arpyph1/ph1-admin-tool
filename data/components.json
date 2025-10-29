@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "id": "1",
+      "name": "PH1 Hero Section",
+      "category": "hero",
+      "source": "Homepage",
+      "description": "Main hero with heading, subheading, and CTA button",
+      "html": "<section class=\"py-20 px-6 bg-gradient-to-br from-blue-50 to-purple-50\">\n  <div class=\"max-w-4xl mx-auto text-center\">\n    <h1 class=\"text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight\">\n      Mapping the future of your business & product\n    </h1>\n    <h2 class=\"text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed\">\n      We pinpoint what your customers and stakeholders want before mapping & testing a new vision for your products and services. Our clients include product teams prototyping improvements, as well as organizational leadership seeking to define and validate strategic futures.\n    </h2>\n    <a href=\"#contact\" class=\"inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition-colors\">\n      Get started\n    </a>\n  </div>\n</section>",
+      "createdAt": "2025-10-01T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "PH1 Services Grid",
+      "category": "grid",
+      "source": "Homepage",
+      "description": "6-card services grid with icons and descriptions",
+      "html": "<section class=\"py-20 px-6 bg-gray-900\">\n  <div class=\"max-w-7xl mx-auto\">\n    <h2 class=\"text-4xl md:text-5xl font-bold text-white text-center mb-16\">\n      What We Offer\n    </h2>\n    <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8\">\n      <a href=\"/service/customer-experience\" class=\"group bg-gray-800 rounded-xl p-8 hover:bg-gray-700 transition-all\">\n        <div class=\"w-16 h-16 mb-6\"><img src=\"/images/product/folder.svg\" alt=\"\" class=\"w-full h-full\" /></div>\n        <h4 class=\"text-2xl font-bold text-white mb-3\">Customer Experience</h4>\n        <p class=\"text-gray-300 mb-4\">Strategies to improve customer satisfaction & enhance services</p>\n      </a>\n      <a href=\"/service/service-design\" class=\"group bg-gray-800 rounded-xl p-8 hover:bg-gray-700 transition-all\">\n        <div class=\"w-16 h-16 mb-6\"><img src=\"/images/product/pen.svg\" alt=\"\" class=\"w-full h-full\" /></div>\n        <h4 class=\"text-2xl font-bold text-white mb-3\">Service Design</h4>\n        <p class=\"text-gray-300 mb-4\">Map your service ecosystem & solve complex challenges</p>\n      </a>\n      <a href=\"/service/ux-research\" class=\"group bg-gray-800 rounded-xl p-8 hover:bg-gray-700 transition-all\">\n        <div class=\"w-16 h-16 mb-6\"><img src=\"/images/product/human.svg\" alt=\"\" class=\"w-full h-full\" /></div>\n        <h4 class=\"text-2xl font-bold text-white mb-3\">UX Research</h4>\n        <p class=\"text-gray-300 mb-4\">Benchmark product performance and improve usability & conversion</p>\n      </a>\n    </div>\n  </div>\n</section>",
+      "createdAt": "2025-10-01T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "name": "PH1 Header Navigation",
+      "category": "nav",
+      "source": "Global",
+      "description": "Main header with logo, dropdown services menu, and links",
+      "html": "<header class=\"fixed top-0 left-0 right-0 bg-white shadow-md z-50\">\n  <div class=\"max-w-7xl mx-auto px-6 py-4 flex items-center justify-between\">\n    <a href=\"/\"><img src=\"/images/logo.svg\" alt=\"PH1\" class=\"h-8\" /></a>\n    <nav class=\"hidden lg:flex items-center gap-8\">\n      <a href=\"/service/customer-experience\" class=\"text-gray-700 hover:text-blue-600\">Services</a>\n      <a href=\"/our-work\" class=\"text-gray-700 hover:text-blue-600\">Our Work</a>\n      <a href=\"/about\" class=\"text-gray-700 hover:text-blue-600\">About</a>\n    </nav>\n  </div>\n</header>",
+      "createdAt": "2025-10-01T10:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "PH1 Footer",
+      "category": "footer",
+      "source": "Global",
+      "description": "Footer with logo, contact info, and links",
+      "html": "<footer class=\"bg-gray-900 text-white py-16 px-6\">\n  <div class=\"max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12\">\n    <div>\n      <img src=\"/images/logo.svg\" alt=\"PH1\" class=\"h-8 mb-6 brightness-0 invert\" />\n      <p class=\"font-bold mb-2\">PH1 Research Inc</p>\n      <p class=\"text-gray-400\">info@ph1.ca</p>\n    </div>\n    <div class=\"space-y-3\">\n      <a href=\"/\" class=\"block text-gray-300 hover:text-white\">Home</a>\n      <a href=\"/about\" class=\"block text-gray-300 hover:text-white\">About PH1</a>\n    </div>\n    <div>\n      <p class=\"text-gray-400\">© PH1 Research 2025</p>\n    </div>\n  </div>\n</footer>",
+      "createdAt": "2025-10-01T10:00:00.000Z"
+    }
+  ]
+}

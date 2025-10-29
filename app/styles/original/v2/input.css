@@ -1,0 +1,70 @@
+@import "./variables.css";
+
+/* Forms
+--------------------------------------------- */
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+input:-moz-placeholder,
+textarea:-moz-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: white;
+  opacity: 1;
+  font-weight: 400;
+}
+
+$custom_input_hover: #545454;
+
+.input-primary,
+.textarea-primary {
+  padding: 0.6rem 0.8rem;
+  background-image: none;
+  background-color: white;
+  font-family: inherit;
+  border: 2px solid #000000;
+  display: block;
+  color: var(--text-color);
+  border-radius: 0;
+  width: 100%;
+  font-size: 16px;
+}
+
+.input-primary:hover,
+.textarea-primary:hover {
+  border-color: $custom_input_hover;
+}
+
+.input-primary:focus,
+.textarea-primary:focus {
+  border: 2px solid var(--color-secondary);
+  box-shadow: none;
+  outline: none;
+}
+
+.input-contact:focus,
+.textarea-contact:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+
+.input-row > input {
+  width: 100%;
+}
+
+@media only screen and (max-width: $mobile) {
+  .input-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 32px;
+  }
+}

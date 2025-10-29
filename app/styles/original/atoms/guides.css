@@ -1,0 +1,73 @@
+@import "../variables.css";
+.guides {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.guide-item {
+  width: 25%;
+  margin: 0;
+  position: relative;
+  color: white;
+  min-width: 9rem;
+}
+
+.guide-item:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  z-index: 0;
+}
+
+.guide-item:hover .trend-item__img {
+  opacity: 1;
+}
+
+.guide-item__span {
+  font-weight: 100;
+  font-size: 0.8rem;
+  padding: 0 0.5rem 2rem;
+  position: relative;
+}
+
+.guide-item__header {
+  font-size: 1.1rem;
+  color: white;
+  position: relative;
+  margin: 0;
+  line-height: 1.4rem;
+  text-transform: uppercase;
+  padding: 0 0.5rem 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: inherit;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@media screen and (min-width: var(--mobile-brake-p)) {
+  .guide-item__header {
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+  }
+  .guide-item__span {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem 2rem;
+  }
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  .guide-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: $bp-xlg-xxlg) {
+  .guide-item__span {
+    display: none;
+  }
+  .guide-item__header {
+    padding-bottom: 25px;
+  }
+}

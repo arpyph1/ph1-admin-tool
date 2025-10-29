@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "tags": [],
+    "concepts": []
+  },
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "ul1bth2hey8p"
+      }
+    },
+    "id": "2gNOkV0Cjg89cvbd4qHVi2",
+    "type": "Entry",
+    "createdAt": "2022-01-17T04:13:16.809Z",
+    "updatedAt": "2024-06-07T13:19:30.415Z",
+    "environment": {
+      "sys": {
+        "id": "master",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "publishedVersion": 250,
+    "publishedAt": "2024-06-07T13:19:30.415Z",
+    "firstPublishedAt": "2022-01-17T04:16:56.324Z",
+    "createdBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0jHFDkWD84uFzkpD1XfDb8"
+      }
+    },
+    "updatedBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "1f8kDOVZvQercvwxHCO9wi"
+      }
+    },
+    "publishedCounter": 54,
+    "version": 251,
+    "publishedBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "1f8kDOVZvQercvwxHCO9wi"
+      }
+    },
+    "fieldStatus": {
+      "*": {
+        "en-US": "published"
+      }
+    },
+    "automationTags": [],
+    "contentType": {
+      "sys": {
+        "type": "Link",
+        "linkType": "ContentType",
+        "id": "globalElements"
+      }
+    },
+    "urn": "crn:contentful:::content:spaces/ul1bth2hey8p/environments/master/entries/2gNOkV0Cjg89cvbd4qHVi2"
+  },
+  "fields": {
+    "meta": {
+      "en-US": "<meta\n  name=\"keywords\"\n  content=\"AI,Innovation,digital product,agency,UX,user experience,UI,design,app design,strategy,workshops,research,market validation,branding,digital strategy,Vancouver,Toronto,Canada,facilitation,design thinking,disruptive design,customer engagement\"\n/>\n<meta name=\"msapplication-tap-highlight\" content=\"no\" />\n<link rel=\"manifest\" href=\"/images/favicons/manifest.json\" />\n<meta name=\"mobile-web-app-capable\" content=\"yes\" />\n<meta name=\"application-name\" content=\"PH1\" />\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\" />\n<meta name=\"apple-mobile-web-app-title\" content=\"PH1\" />\n<meta\n  property=\"og:image\"\n  content=\"https://ph1.ca/assets/imgs/meta_banner.jpg\"\n/>\n<meta property=\"og:site_name\" content=\"PH1 Research Inc\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta name=\"apple-mobile-web-app-title\" content=\"ph1\" />\n<meta name=\"application-name\" content=\"ph1\" />\n<meta\n  name=\"msapplication-config\"\n  content=\"/images/favicons/browserconfig.xml\"\n/>\n<meta name=\"theme-color\" content=\"#ffc73f\" />\n<meta name=\"msapplication-TileColor\" content=\"#ffc73f\" />\n<meta name=\"theme-color\" content=\"#2F3BA2\" />\n<meta\n  name=\"google-site-verification\"\n  content=\"iLwXfQBiH3aYKjKq1QJPW1uEO00TUzJW8FhGzeN9rVs\"\n/>\n<link\n  rel=\"apple-touch-icon\"\n  sizes=\"180x180\"\n  href=\"/images/favicons/apple-touch-icon.png\"\n/>\n<link\n  rel=\"icon\"\n  type=\"image/png\"\n  href=\"/images/favicons/favicon-32x32.png\"\n  sizes=\"32x32\"\n/>\n<link\n  rel=\"icon\"\n  type=\"image/png\"\n  href=\"/images/favicons/favicon-16x16.png\"\n  sizes=\"16x16\"\n/>\n<link\n  rel=\"mask-icon\"\n  href=\"/images/favicons/safari-pinned-tab.svg\"\n  color=\"#ffc73f\"\n/>\n<link rel=\"shortcut icon\" href=\"/images/favicons/favicon.ico\" />\n<link rel=\"image_src\" href=\"https://ph1.ca/assets/imgs/meta_banner.jpg\" />\n<link rel=\"canonical\" href=\"https://ph1.ca\" />\n<title>\nPH1 | AI product discovery research consultants & coaching | AI research & user testing | Service design\n</title>\n<meta\n  name=\"description\"\n  content=\"We answer questions about customers, competitors, and how to leverage the technology to gain an advantage. Clients: Spotify, Microsoft, Mozilla & more\"\n/>\n<meta\n  property=\"og:title\"\n  content=\"PH1 | AI product discovery research consultants & coaching | AI research & user testing | Service design\"\n/>\n<meta\n  property=\"og:description\"\n  content=\"We answer questions about customers, competitors, and how to leverage the technology to gain an advantage. Clients: Spotify, Microsoft, Mozilla & more\"\n/>\n<meta property=\"og:url\" content=\"https://ph1.ca\" />\n"
+    },
+    "metaGlobal": {
+      "en-US": "<meta charset=\"utf-8\" />\n<meta http-equiv=\"content-language\" content=\"en\">\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n<meta\n  name=\"viewport\"\n  content=\"user-scalable=yes, width=device-width, initial-scale=1, maximum-scale=1\"\n/>"
+    },
+    "version": {
+      "en-US": "Global elements v1"
+    },
+    "isNotificationBarActiveOnAllPages": {
+      "en-US": true
+    },
+    "notificationBarContent": {
+      "en-US": "<section class=\"notification-bar\">\n\t<div class=\"row\">\n\n\t\t<span>Design of AI podcast: The podcast for product teams</span>\n\n\t\t<a href=\"https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf\" class=\"u--desktop-only\" rel=\"noopener noreferrer\">List of episodes</a>\n\n\t\t<a href=\"https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf\" class=\"u--mobile-only\" rel=\"noopener noreferrer\">List of episodes</a>\n\n\t</div>\n</section>"
+    },
+    "headerContent": {
+      "en-US": "<!-- 2 level item with a dropdown -->\n\n<span class=\"header__nav-item--container\">\n  <a href=\"javascript:void(0);\" class=\"header__nav-item header__nav-item-span nav-services\">Services</a>\n\n  <div class=\"multi-item-menu\">\n    <a href=\"https://ph1.ca/service/customer-experience\"\n      class=\"header__nav-item nav-journey-mapping multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">Customer Experience</span></a>\n    <a href=\"https://ph1.ca/service/service-design\"\n      class=\"header__nav-item nav-persona-research multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">Service Design</span></a>\n  <a href=\"https://ph1.ca/service/GenAI-AI\"\n      class=\"header__nav-item nav-ux-research multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">AI product research & strategy</span></a> \n    <a href=\"https://ph1.ca/service/ux-research\"\n      class=\"header__nav-item nav-usability-testing multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">UX Research</span></a>\n    <a href=\"https://ph1.ca/service/innovation-sprints\"\n      class=\"header__nav-item nav-service-design multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">Innovation Sprints</span></a>\n    <a href=\"https://ph1.ca/service/personas\"\n      class=\"header__nav-item nav-customer-experience multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">Personas & Journey Maps</span></a>\n    <a href=\"https://ph1.ca/service/futures-roadmaps\"\n      class=\"header__nav-item nav-ux-research multi-item-menu__item header__nav-lvl-2\"><span\n        class=\"header__nav-item-span\">Futures & Roadmaps</span></a>\n  </div>\n</span>\n\n<!-- 1 level item -->\n\n<div class=\"header__nav-wrap\">\n  <a href=\"https://ph1.ca/our-work\" class=\"header__nav-item nav-clients\"><span class=\"header__nav-item-span\">Our Work</span></a> \n<!--  <a href=\"https://ph1.ca/service/web3-NFT-DAO\" class=\"header__nav-item nav-clients\"><span class=\"header__nav-item-span\">Web3</span></a> -->\n\n<!-- <a href=\"/talent\" class=\"header__nav-item nav-talent\"><span class=\"header__nav-item-span\">Talent</span></a>-->\n\n  <a href=\"/training\" class=\"header__nav-item nav-blog\"><span class=\"header__nav-item-span\">Training</span></a>\n</div>\n"
+    },
+    "clientLogosOrder": {
+      "en-US": [
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "2MdmRihtSp3SfIVvWgaZxZ"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "407t6XSDOmWurROp5FIpjd"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "1TYkS4bAqRUiPVG9cStgRg"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "4ofa5PY6GLBqvvq4nkHA3a"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "4oz1JSjxw3Dnrgu4pqldC6"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "148mk4YkBGGDyEdnErHQiC"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "503TrpdFLPP9rD06fp5K10"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "7HxNrxCRTEC5vQnwG37tli"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "3Hh1gy6zcQtDBJQLg4UtAp"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "1dkvnTsyEerg1ACJziTLhf"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "2d6hRB8Bg9YOJyrVK0ozjb"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "MJuZPGI5Un6eX6xSWDHVB"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "65RPNeKKds340MSJAjvngp"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "3fxCYIpjCwzbl5vWk2XVW0"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "22OGVAbuk3cGvXrVQzVPg4"
+          }
+        },
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "5Wz4uoO5VkJHPorMi7LL3o"
+          }
+        }
+      ]
+    },
+    "footerContent": {
+      "en-US": "<img class=\"footer__img\" src=\"/images/logo.svg\" alt=\"\" />\n\n<div class=\"column one-third\">\n  <span class=\"footer__text\">\n    <strong>PH1 Research Inc</strong>\n    <br />\n    info@ph1.ca\n  </span>\n  <div class=\"footer-links-column\">\n    Vancouver\n    Calgary\n    Toronto\n  </div>\n</div>\n\n<div class=\"column one-third footer-links-column middle-column\">\n  <a href=\"/\">Home</a>\n  <a href=\"/about\">About PH1</a>\n  <a href=\"/service/GenAI-AI\">AI product research & strategy</a>\n  <a href=\"/service/customer-experience\">Customer Experience (CX)</a>\n  <a href=\"/service/service-design\">Service Design</a>\n  <a href=\"/service/ux-research\">User Experience (UX) Research</a>\n  <a href=\"/service/personas\">Behavioural Personas & Journey Mapping</a>\n  <a href=\"/service/innovation-sprints\">Innovation Sprints</a>\n  <a href=\"/service/futures-roadmaps\">Futures & Roadmaps</a>\n\n</div>\n\n<div class=\"column one-third footer-links-column\">\n  <span class=\"footer__text\">\n    © PH1 Research 2024\n  </span>\n   <span style=\"color: hsla(0,0%,100%,.5)\">\n  <a href=\"/trend/privacy-policy\">Privacy Policy</a>\n  </span>\n</div>"
+    },
+    "bottomNavigationBar": {
+      "en-US": "<a href=\"/our-work\" rel=\"noopener noreferrer\">\n\t<img class=\"lazy\" data-src=\"/images/home/Arrow_yellow.svg\" alt=\"svg arrow left\" /> \n\tOur Work\n</a>\n<a href=\"/about\" rel=\"noopener noreferrer\">\n\tAbout us \n\t<img class=\"lazy\" data-src=\"/images/home/Arrow_yellow.svg\" alt=\"svg arrow right\" />\n</a>"
+    }
+  }
+}

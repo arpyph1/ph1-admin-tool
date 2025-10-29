@@ -1,0 +1,49 @@
+{
+  "name": "ph1-prompt-preview-system",
+  "version": "1.0.0",
+  "description": "Intelligent preview system for prompt-driven website modifications - Transform your website with natural language",
+  "main": "components/preview/SmartPreviewSystem.tsx",
+  "scripts": {
+    "demo": "open demo.html",
+    "setup": "./setup.sh",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.263.1"
+  },
+  "peerDependencies": {
+    "next": "^14.0.0",
+    "tailwindcss": "^3.3.0"
+  },
+  "keywords": [
+    "prompt-driven",
+    "ai-preview",
+    "website-management",
+    "react",
+    "nextjs",
+    "cms",
+    "no-code",
+    "natural-language"
+  ],
+  "author": "PH1 Development Team",
+  "license": "MIT",
+  "files": [
+    "components/",
+    "demo.html",
+    "PREVIEW_SYSTEM_DOCS.md",
+    "QUICK_START.md",
+    "setup.sh"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ph1/prompt-preview-system"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "readme": "QUICK_START.md"
+}

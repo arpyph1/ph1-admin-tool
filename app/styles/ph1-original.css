@@ -1,0 +1,8 @@
+/* Import PH1 Original Styles */
+@import './original/variables.css';
+@import './original/global.css';
+@import './original/grid.css';
+@import './original/header.css';
+@import './original/footer.css';
+@import './original/animation.css';
+@import './original/atoms.css';

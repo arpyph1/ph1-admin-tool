@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Original PH1 styles - only for public pages */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+@import './styles/original/variables.css';
+@import './styles/original/global.css';
+@import './styles/original/grid.css';
+@import './styles/original/header.css';
+@import './styles/original/footer.css';
+@import './styles/original/animation.css';
+@import './styles/original/btn.css';
+@import './styles/original/input.css';
+@import './styles/original/form.css';
+@import './styles/original-homev2.css';

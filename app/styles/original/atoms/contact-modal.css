@@ -1,0 +1,61 @@
+@import "../variables.css";
+.contact-modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  justify-content: center;
+  height: 100%;
+  z-index: 200;
+  overflow: scroll;
+  background-color: rgba(36, 36, 36, 0.8);
+}
+
+.contact-modal.is-active {
+  display: flex;
+  animation: slide-in-bck-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slide-in-bck-center {
+  0% {
+    transform: translateZ(600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.contact-modal-wrap {
+  background-color: var(--color-secondary)_active;
+  overflow: scroll;
+  width: 100%;
+  max-width: 23rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  position: absolute;
+  top: 3rem;
+  margin: 4rem 0;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.contact-modal__header {
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.contact-modal__close {
+  color: white;
+  font-size: 1.4rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  #form-captcha {
+    transform: scale(0.8);
+    transform-origin: 0 0;
+  }
+}

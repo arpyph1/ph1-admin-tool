@@ -1,0 +1,61 @@
+.logos {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: -1rem 0 0 -1rem;
+}
+
+.logos__img {
+  max-width: 10rem;
+  margin: 2rem 0 0 1rem;
+}
+
+.logos__img--limited {
+  max-width: 7rem;
+}
+
+.logos__img--limited-xs {
+  max-width: 6rem;
+}
+.logos__img--limited-s {
+  max-width: 7rem;
+}
+.logos__img--limited-m {
+  max-width: 8rem;
+}
+.logos__img--limited-l {
+  max-width: 9rem;
+}
+
+.logos__img--spoken {
+  max-width: 7rem;
+}
+
+.logos__img--spoken__vanclub {
+  max-width: 6rem;
+}
+
+.logos__img--larger-m-top {
+  margin-top: 4rem;
+}
+
+.section--logos {
+  margin-bottom: 3rem;
+}
+
+.section--logos--narrow .logos__img--larger-m-top {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  .logos {
+    justify-content: space-between;
+    margin: 0;
+    /* flex-flow: column; */
+    padding: 2rem 0;
+  }
+  .logos__img {
+    margin: 4rem 0 0 0;
+  }
+}

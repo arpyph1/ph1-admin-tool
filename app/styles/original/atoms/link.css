@@ -1,0 +1,51 @@
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link--block {
+  display: block;
+}
+
+.link--in-block {
+  display: inline-block;
+}
+
+.link-in-btn {
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.arrow-link__container {
+  text-align: right;
+}
+
+.arrow-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
+  color: var(--color-primary);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.arrow-link i {
+  margin-left: 4px;
+}
+
+.arrow-link:active,
+.arrow-link:hover {
+  border-bottom: 2px solid var(--color-highlight-primary);
+  padding-bottom: 2px;
+}
+
+.arrow-link--white {
+  color: white;
+}

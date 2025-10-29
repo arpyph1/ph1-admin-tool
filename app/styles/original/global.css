@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,700&family=Oswald:wght@300;400;600&display=swap");
+@import "variables.css";
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  font-size: 100%;
+}
+
+body {
+  position: relative;
+  font-family: "Lato", Helvetica, sans-serif;
+  color: var(--color-secondary);
+  background-color: white;
+}
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-primary);
+  font-family: "Oswald", sans-serif;
+}
+
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.575rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+p {
+  font-size: 1.125rem;
+  font-weight: 200;
+  line-height: 1.8;
+}
+
+ul {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.u--font-light {
+  font-weight: 300;
+}
+
+.u--font-regular {
+  font-weight: 400;
+}
+
+.u--font-heavy {
+  font-weight: 500;
+}
+
+.u--c--white {
+  color: white !important;
+}
+
+.u--a--center {
+  text-align: center;
+}
+
+/* POSITIONING */
+
+.u--left {
+  text-align: left;
+}
+
+.u--right {
+  text-align: right;
+}
+
+.u--f-left {
+  float: left;
+}
+
+.u--f-right {
+  float: right;
+}
+
+.u--center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.u--justify {
+  text-align: justify;
+}
+
+.u--no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.u--no-margin-t {
+  maring-top: 0;
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  .u-m--f-none {
+    float: none !important;
+  }
+  .u-m--no-padding-tb {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .u-m--no-padding-lr {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .u-m--no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+@media screen and (min-width: var(--mobile-brake-p)) {
+  .u-d--no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .u-d--no-margin {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}

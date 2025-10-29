@@ -1,0 +1,51 @@
+@import "variables.css";
+
+footer {
+  padding: 50px 0 50px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.9) 44.39%,
+    #000000 100%
+  );
+  color: white;
+}
+
+.footer__img {
+  margin-left: 3px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  width: 76px;
+  display: block;
+  padding-left: 20px;
+  box-sizing: content-box;
+}
+
+.footer__text {
+  padding-bottom: 25px;
+  display: block;
+}
+
+.footer__text,
+.footer__text strong {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-links-column a {
+  font-size: 14px;
+  color: #fff;
+  margin: 0 0 10px 0;
+  display: block;
+  cursor: pointer;
+}
+
+.footer-links-column a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  .middle-column {
+    display: none;
+  }
+}

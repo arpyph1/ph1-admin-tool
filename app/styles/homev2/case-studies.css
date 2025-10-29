@@ -1,0 +1,85 @@
+/* CASE STUDIES */
+
+.section-case-studies {
+  margin-top: 25px;
+  margin-bottom: 50px;
+}
+
+.section-case-studies__container {
+  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 193px);
+  grid-auto-flow: column;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+
+  /* For animation to look good coming from the bottom */
+  padding-bottom: 40px;
+}
+
+.case-study {
+  /* For animation */
+  opacity: 0;
+
+  width: 193px;
+  position: relative;
+  overflow: hidden;
+  height: 353px;
+  padding: 30px 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition: box-shadow 0.1s ease;
+  cursor: pointer;
+}
+
+.case-study:hover {
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+
+.case-study .image-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 40.59%,
+    rgba(0, 0, 0, 0.56115) 64.4%,
+    #000000 100%
+  );
+}
+
+.case-study img:first-child {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -2;
+  left: 0;
+  top: 0;
+}
+
+.case-study__logo {
+  filter: grayscale(1);
+  width: 60px;
+}
+
+.case-study p {
+  font-size: 14px;
+  line-height: 120%;
+  color: #ffffff;
+  margin: 12px 0px 0px 0px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: $mobile) {
+  .section-case-studies {
+    margin-bottom: 20px;
+  }
+}

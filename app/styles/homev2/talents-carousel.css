@@ -1,0 +1,69 @@
+@import "../../../_common/style/v2/variables.css";
+
+/* TALENTS */
+
+.section-talents {
+  margin-top: 55px;
+  margin-bottom: 30px;
+}
+
+.section-talents__container {
+  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px);
+  grid-auto-flow: column;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding-bottom: 30px;
+}
+
+.team-member {
+  width: 200px;
+  height: 382px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  cursor: pointer;
+  color: #000;
+}
+
+.team-member img {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.team-member__name {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 110%;
+  margin: 0px 0px 4px 0px;
+}
+.team-member__title {
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0.1px;
+  color: #666;
+  margin: 0px;
+}
+.team-member__years {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: 0.1px;
+  color: #51c2e7;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 12px 0px 0px 0px;
+}
+
+@media only screen and (max-width: $mobile) {
+  .section-talents {
+    margin-top: 45px;
+  }
+}

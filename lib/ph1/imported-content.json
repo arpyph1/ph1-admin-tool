@@ -1,0 +1,66 @@
+{
+  "navigation": [
+    "Services",
+    "Customer Experience",
+    "Service Design",
+    "UX Research",
+    "Innovation Sprints",
+    "Personas & Journey Maps",
+    "Futures & Roadmaps",
+    "Our Work",
+    "Training",
+    "About"
+  ],
+  "hero": {
+    "headline": "Mapping the future of your business & product",
+    "subheadline": "20+ years of expertise",
+    "cta": [
+      "Get Started",
+      "Learn More"
+    ]
+  },
+  "sections": [
+    {
+      "title": "We pinpoint what your customers and stakeholders want before mapping & testing a new vision for your products and services. Our clients include product teams prototyping improvements, as well as organizational leadership seeking to define and validate strategic futures.",
+      "content": "Professional services",
+      "type": "content"
+    },
+    {
+      "title": "Our Work",
+      "content": "Professional services",
+      "type": "content"
+    },
+    {
+      "title": "Our clients",
+      "content": "Professional services",
+      "type": "content"
+    },
+    {
+      "title": "How we help product teams",
+      "content": "Scan which innovative uses of AI can benefit your business & get user feedback relevant ones",
+      "type": "content"
+    },
+    {
+      "title": "What We Offer",
+      "content": "Strategies to improve customer satisfaction & enhance services",
+      "type": "content"
+    },
+    {
+      "title": "Upskill Your Team",
+      "content": "Professional services",
+      "type": "content"
+    },
+    {
+      "title": "Tell Us About Your Project",
+      "content": "Professional services",
+      "type": "content"
+    }
+  ],
+  "images": [],
+  "colors": {
+    "primary": "#1e40af",
+    "secondary": "#1e3a8a",
+    "accent": "#3b82f6"
+  },
+  "fonts": []
+}

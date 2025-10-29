@@ -1,0 +1,26 @@
+@import "../variables.css";
+.recommendation {
+  text-align: center;
+}
+
+.recommendation__quote {
+  line-height: 1.5;
+  text-align: center;
+  font-weight: bold;
+}
+
+.recommendation__author {
+  text-transform: uppercase;
+  color: grey;
+}
+
+.recommendation__author-link {
+  color: grey;
+  text-decoration: none;
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  .recommendation__quote {
+    padding: 1rem;
+  }
+}

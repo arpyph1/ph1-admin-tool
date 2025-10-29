@@ -1,0 +1,103 @@
+@import "./variables.css";
+.btn {
+  font-family: Oswald, sans-serif;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 2px;
+  outline: 0;
+  border: 0;
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+.btn-primary {
+  background-color: var(--color-secondary);
+  color: white;
+  padding: 0.6rem 1rem;
+  min-width: 12rem;
+}
+
+.btn-primary--reverse {
+  background-color: white;
+  color: var(--color-secondary);
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: var(--color-highlight-primary);
+  color: white;
+}
+
+.btn::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+.btn:focus,
+.btn:hover {
+  filter: alpha(opacity=90);
+  background-image: -webkit-linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.05) 40%,
+    rgba(0, 0, 0, 0.1)
+  );
+  background-image: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.05) 40%,
+    rgba(0, 0, 0, 0.1)
+  );
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn[disabled] {
+  border: none;
+  background-image: none;
+  filter: alpha(opacity=40);
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.btn--section {
+  margin-top: 2rem;
+  display: block;
+  text-transform: uppercase;
+}
+
+.btn--wide {
+  width: 100%;
+}
+
+.btn-highlight {
+  background-color: var(--color-highlight-secondary);
+  color: white;
+  padding: 0.6rem 1rem;
+  min-width: 12rem;
+}
+
+$color_highlight_darker_secondary: #196282;
+
+.btn-highlight:focus,
+.btn-highlight:hover {
+  background-color: $color_highlight_darker_secondary;
+  color: white;
+}

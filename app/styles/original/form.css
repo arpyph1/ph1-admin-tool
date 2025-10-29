@@ -1,0 +1,6 @@
+.contact-form-static .row {
+  margin-bottom: 12px;
+}
+.contact-form-static .row:last-child {
+  padding-top: 8px;
+}

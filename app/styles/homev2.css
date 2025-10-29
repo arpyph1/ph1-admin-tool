@@ -1,0 +1,258 @@
+/* LAYOUT */
+.hero {
+  position: relative;
+  min-height: 600px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.hero .row {
+  position: relative;
+  z-index: 10;
+}
+
+.hero .column.six {
+  max-width: 500px;
+}
+
+.hero h1 {
+  font-family: "Oswald", sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 140%;
+  margin-bottom: 16px;
+  color: var(--color-primary);
+}
+
+.hero h2 {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 160%;
+  margin-bottom: 32px;
+  color: var(--text-color);
+}
+
+.hero-animation {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 450px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-animation .svg-logotype {
+  width: 100%;
+  height: 100%;
+}
+
+.btn--primary {
+  background-color: #ffc72d;
+  color: #000;
+  padding: 14px 28px;
+  font-weight: 700;
+  border-radius: 4px;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  font-size: 16px;
+}
+
+.btn--primary:hover {
+  background-color: #fab700;
+}
+
+/* CASE STUDIES */
+.section-case-studies {
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+.section-case-studies h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--color-primary);
+}
+
+.section-case-studies__container {
+  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 193px);
+  grid-auto-flow: column;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding-bottom: 40px;
+}
+
+.case-study {
+  width: 193px;
+  position: relative;
+  overflow: hidden;
+  height: 353px;
+  padding: 30px 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition: box-shadow 0.1s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.case-study:hover {
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}
+
+.case-study .image-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 40.59%,
+    rgba(0, 0, 0, 0.56115) 64.4%,
+    #000000 100%
+  );
+}
+
+.case-study img:first-child {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+}
+
+.case-study__logo {
+  filter: grayscale(1) brightness(10);
+  width: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.case-study p {
+  font-size: 14px;
+  line-height: 120%;
+  color: #ffffff;
+  margin: 12px 0px 0px 0px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+}
+
+/* CLIENTS */
+.section-clients {
+  margin: 80px 0;
+  padding: 80px 0;
+  background-color: #f5f5f5;
+}
+
+.section-clients h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 40px;
+  align-items: center;
+  justify-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.clients-grid img {
+  max-width: 120px;
+  max-height: 60px;
+  height: auto;
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.clients-grid img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* NOTIFICATION BAR */
+.notification-bar {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.notification-bar .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn--small {
+  background-color: #ffc72d;
+  color: #000;
+  padding: 8px 18px;
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.btn--header {
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 680px) {
+  .hero {
+    min-height: 800px;
+    padding-top: 60px;
+  }
+  
+  .hero .column.six {
+    max-width: 100%;
+  }
+  
+  .hero-animation {
+    position: absolute;
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: 50px;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .hero h1 {
+    font-size: 32px;
+  }
+  
+  .hero h2 {
+    font-size: 18px;
+  }
+  
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 30px;
+  }
+}

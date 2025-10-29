@@ -1,0 +1,76 @@
+@import "variables.css";
+
+footer {
+  padding: 2rem 0 0 0;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.footer__header {
+  color: white;
+  padding: 0;
+  margin: 0;
+  margin-bottom: -12px;
+  padding-left: 20px;
+}
+
+.footer__hr {
+  margin: 22px 19px;
+}
+
+.footer__text,
+.footer__link {
+  font-size: 14px;
+  color: #fff;
+}
+
+.footer__link {
+  margin: 0 0 10px 0;
+}
+
+.footer__link:hover {
+  color: white;
+}
+
+.footer__terms-use {
+  margin-right: 1rem;
+}
+
+.cxc-logo-link {
+  width: 78px;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+
+.footer__link--no-m-block {
+  max-width: 150px;
+}
+
+.footer-top-row {
+  padding-bottom: 20px;
+}
+
+.footer-bottom-row {
+  background-color: var(--color-secondary);
+}
+
+.footer-bottom-row .column {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  footer {
+    font-size: 14px;
+  }
+
+  .footer__link {
+    margin-top: 1rem;
+    display: block;
+  }
+
+  .footer__link--no-m-block {
+    display: inline-block;
+    max-width: 250px;
+  }
+}

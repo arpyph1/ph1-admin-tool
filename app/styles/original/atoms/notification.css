@@ -1,0 +1,97 @@
+.intro-snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #ffffff;
+  background-color: -webkit-linear-gradient(to left, #ffffff, #f3f3f3);
+  background-color: linear-gradient(to left, #ffffff, #f3f3f3);
+  background: -webkit-linear-gradient(to left, #ffffff, #f3f3f3);
+  color: grey;
+  border-radius: 7px;
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  right: 20px;
+  top: 70px;
+  font-size: 17px;
+  z-index: 99999;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  overflow: hidden;
+  max-width: 400px;
+}
+.intro-snackbar > a > i {
+  font-size: 29px;
+  color: #5a5a5a;
+}
+
+.intro-snackbar > span {
+  z-index: 99999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  border-left: 1px solid #efefef;
+  font-size: 17px;
+  color: #bdbdbd;
+}
+.intro-snackbar > span:hover {
+  background: whitesmoke;
+}
+
+.intro-snackbar > a > div {
+  padding: 0 10px;
+}
+
+.intro-snackbar > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0 16px 16px;
+}
+.intro-snackbar > a h3 {
+  margin: 0;
+  font-family: "Lato";
+  font-size: 18px;
+}
+.intro-snackbar > a p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  margin-top: 5px;
+  color: #696969;
+  font-weight: 500;
+}
+
+.intro-snackbar.show-snackbar {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
+}
+
+.intro-snackbar.hide-snackbar {
+  visibility: visible;
+  -webkit-animation: fadeout 0.6s;
+  animation: fadeout 0.6s;
+}
+
+@keyframes fadein {
+  from {
+    right: 0;
+    opacity: 0;
+  }
+  to {
+    right: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    right: 20px;
+    opacity: 1;
+  }
+  to {
+    right: 0;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,38 @@
+@import "../variables.css";
+
+.carousel-link-row {
+  margin-top: 15px;
+}
+
+a.carousel-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+a.carousel-link i {
+  margin-left: 4px;
+}
+
+a.carousel-link:active,
+a.carousel-link:hover {
+  border-bottom: 2px solid var(--color-highlight-primary);
+  padding-bottom: 2px;
+}
+
+.glide__slide__inner {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-light-v2-grey);
+}
+
+.glide__slide__inner img {
+  width: 170px;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}

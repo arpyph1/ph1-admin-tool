@@ -1,0 +1,26 @@
+@import "../variables.css";
+
+.upcoming-events-widget__item {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-grey)_v2;
+  margin-bottom: 20px;
+}
+.upcoming-events-widget__item h3 {
+  font-size: 17px;
+  margin: 0 0 6px 0;
+  color: var(--color-highlight-primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.upcoming-events-widget__item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--text-color);
+}
+.upcoming-events-widget__item:last-child {
+  border: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}

@@ -1,0 +1,74 @@
+@import "../variables.css";
+.profile {
+  position: relative;
+  width: 50%;
+  align-items: center;
+  overflow: hidden;
+  display: flex;
+  background-color: var(--color-secondary);
+  text-align: center;
+  color: white;
+}
+
+.profile-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparant;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.profile-desc {
+  z-index: 1;
+  width: 100%;
+  height: 6rem;
+  position: absolute;
+  left: 0;
+  top: calc(50% - 3rem);
+  padding-top: 140px;
+}
+
+.profile-desc__name {
+  text-align: center;
+  margin: 0 auto 0.5rem;
+  max-width: 13rem;
+  font-size: 3rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.profile-desc__head {
+  font-size: 3rem;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.profile__image {
+  max-width: 100%;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.profile:hover .profile__image,
+.profile:focus .profile__image {
+  transform: scale3d(1.1, 1.1, 1.1);
+}
+
+@media screen and (max-width: var(--mobile-brake-p)) {
+  .profile-desc__name {
+    font-size: 2rem;
+  }
+
+  .profile-desc {
+    padding-top: 50px;
+  }
+}
+
+@media screen and (max-width: $bp-md-lg) {
+  .profile-desc {
+    padding-top: 80px;
+  }
+}

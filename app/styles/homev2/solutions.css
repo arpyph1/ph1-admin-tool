@@ -1,0 +1,123 @@
+@import "../../../_common/style/v2/variables.css";
+
+/* SOLUTIONS */
+
+.section-solutions__container {
+  background-color: #010101;
+  color: #fff;
+  padding-top: 100px;
+  padding-bottom: 150px;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  transform: translateY(-5px);
+}
+
+@media only screen and (max-width: $desktop) {
+  .section-solutions__container {
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .section-solutions__container {
+    padding-top: 30px;
+    padding-bottom: 40px;
+    clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
+  }
+}
+
+
+.section-solutions {
+  /* For animation */
+  opacity: 0;
+}
+
+.section-solutions__content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 30px;
+}
+
+.solution {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solution__title {
+  font-size: 22px;
+  line-height: 120%;
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.solution__text {
+  max-width: 200px;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: #cbcbcb;
+  margin: 0;
+}
+
+.solution__img {
+  /* For animation */
+  opacity: 0;
+
+  margin-bottom: 0;
+}
+
+.solution__btn {
+  margin-top: 40px;
+}
+
+.solution__btn img {
+  margin-left: 5px;
+  color: #010101;
+}
+
+@media only screen and (max-width: $desktop) {
+  .section-solutions__content {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
+  }
+
+  .solution {
+    flex: 1;
+  }
+
+  .solution:first-child {
+    flex: 100%;
+  }
+}
+
+@media only screen and (max-width: $mobile) {
+  .section-solutions__content {
+    display: block;
+  }
+
+  .solution {
+    margin-bottom: 40px;
+  }
+
+  .solution__title {
+    margin: 5px 0 4px 0;
+  }
+
+  .solution__btn {
+    margin-top: 20px;
+  }
+
+  .solution__img {
+    width: 90px;
+    margin-bottom: 10px;
+  }
+  .solution__img img {
+    width: 100%;
+  }
+}
