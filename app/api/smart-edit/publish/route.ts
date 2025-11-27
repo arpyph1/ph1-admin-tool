@@ -43,7 +43,7 @@ export async function POST(request: Request) {
       message: 'Changes published and deployed',
       filesChanged: previews.length
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Publish error:', error);
     return Response.json(
       { success: false, error: 'Publish failed: ' + error },

@@ -31,12 +31,12 @@ export function CaseStudiesCarousel() {
           const desc = study.fields?.problemStatement || '';
           const key = study.fields?.key || study.sys?.id;
           const image = study.fields?.heroImage;
-          const imageUrl = image ? \`https:\${image}\` : null;
+          const imageUrl = image ? `https:${image}` : null;
 
           return (
-            
+            <a
               key={study.sys.id}
-              href={\`/case-study/\${key}\`}
+              href={`/case-study/${key}`}
               className="case-study block relative overflow-hidden aspect-square"
             >
               {imageUrl && (

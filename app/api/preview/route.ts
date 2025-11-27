@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       success: true,
       url: `/preview/${cleanSlug}`
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Preview error:', error)
     return NextResponse.json({ 
       error: error.message 

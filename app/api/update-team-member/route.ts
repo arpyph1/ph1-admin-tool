@@ -88,7 +88,7 @@ export async function POST(request: Request) {
       teamMember: updatedData,
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error updating team member:', error);
     return Response.json(
       { 

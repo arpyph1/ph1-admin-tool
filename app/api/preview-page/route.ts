@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       success: true,
       variations
     })
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({
       success: false,
       message: (error as Error).message

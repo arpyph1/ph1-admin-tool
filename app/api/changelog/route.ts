@@ -19,7 +19,7 @@ export async function GET() {
           ...manifest,
           backupId: backup
         });
-      } catch (error) {
+      } catch (error: any) {
         // Skip if no manifest
       }
     }
@@ -28,7 +28,7 @@ export async function GET() {
     changes.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
     
     return Response.json({ success: true, changes });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error loading changelog:', error);
     return Response.json({ success: true, changes: [] });
   }

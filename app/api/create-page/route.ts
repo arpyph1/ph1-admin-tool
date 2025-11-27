@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       path: `app/${slug}/page.tsx`,
       url: `/${slug}`
     })
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({
       success: false,
       message: (error as Error).message

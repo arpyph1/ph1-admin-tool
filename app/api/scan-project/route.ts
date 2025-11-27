@@ -44,7 +44,7 @@ async function scanDirectory(dir: string, baseDir: string, files: FileInfo[] = [
         }
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error scanning ${dir}:`, error);
   }
   
@@ -69,7 +69,7 @@ export async function GET() {
       ...organized
     });
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error scanning project:', error);
     return Response.json(
       { 

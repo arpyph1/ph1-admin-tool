@@ -15,7 +15,7 @@ export async function GET() {
         success: true,
         history,
       });
-    } catch (error) {
+    } catch (error: any) {
       return NextResponse.json({
         success: true,
         history: [],

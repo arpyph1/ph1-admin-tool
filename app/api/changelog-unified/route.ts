@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     await saveChangelog(changelog);
     
     return Response.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Changelog error:', error);
     return Response.json({ success: false, error: String(error) }, { status: 500 });
   }
@@ -45,7 +45,7 @@ export async function GET() {
   try {
     const changelog = await loadChangelog();
     return Response.json({ success: true, changes: changelog.changes });
-  } catch (error) {
+  } catch (error: any) {
     return Response.json({ success: false, changes: [] });
   }
 }

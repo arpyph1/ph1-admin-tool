@@ -53,7 +53,7 @@ export default async function AboutPage() {
                   <div className="relative aspect-[3/4] overflow-hidden">
                     {member.photo ? (
                       <Image
-                        src={member.photo}
+                        src={member.photo.url}
                         alt={`${member.name} profile picture`}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"

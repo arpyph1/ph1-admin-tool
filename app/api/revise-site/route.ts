@@ -71,7 +71,7 @@ Provide actionable, specific recommendations. Return ONLY the JSON, no markdown 
       ...analysis
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error processing revision request:', error);
     return Response.json(
       { 

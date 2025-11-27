@@ -1,4 +1,8 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+
+const BASE_URL = 'https://ph1.ca';
+const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
 
 async function getCaseStudy(slug: string) {
   try {
@@ -8,17 +12,17 @@ async function getCaseStudy(slug: string) {
       { cache: 'no-store' }
     );
     const data = await res.json();
-    
+
     if (!data.items || data.items.length === 0) return null;
-    
+
     const item = data.items[0];
-    const assetMap: any = {};
+    const assetMap: Record<string, string> = {};
     if (data.includes?.Asset) {
       data.includes.Asset.forEach((asset: any) => {
         assetMap[asset.sys.id] = asset.fields?.file?.url;
       });
     }
-    
+
     const heroImageId = item.fields?.heroImage?.sys?.id;
     return {
       ...item,
@@ -32,7 +36,7 @@ async function getCaseStudy(slug: string) {
 
 function renderRichText(content: any): string {
   if (!content || !content.content) return '';
-  
+
   return content.content.map((node: any) => {
     if (node.nodeType === 'paragraph') {
       const text = node.content?.map((c: any) => c.value || '').join('') || '';
@@ -42,18 +46,93 @@ function renderRichText(content: any): string {
   }).join('');
 }
 
+function extractPlainText(content: any): string {
+  if (!content || !content.content) return '';
+
+  return content.content.map((node: any) => {
+    if (node.nodeType === 'paragraph') {
+      return node.content?.map((c: any) => c.value || '').join('') || '';
+    }
+    return '';
+  }).join(' ').trim();
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const caseStudy = await getCaseStudy(params.slug);
+
+  if (!caseStudy) {
+    return {
+      title: 'Case Study Not Found | PH1 Research',
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const getField = (fieldName: string) => {
+    const field = caseStudy.fields?.[fieldName];
+    return field ? (field['en-US'] || field) : null;
+  };
+
+  const problemStatement = getField('problemStatement') || 'Case Study';
+  const seoTitle = getField('seoTitle') || problemStatement;
+  const introText = extractPlainText(getField('intro'));
+  const seoDescription = getField('seoDescription') || introText || `Read about our ${problemStatement} case study at PH1 Research`;
+  const seoCanonicalOverride = getField('seoCanonicalOverride');
+  const seoNoindex = getField('seoNoindex') === true;
+
+  // Get OG image URL
+  let ogImageUrl = DEFAULT_OG_IMAGE;
+  if (caseStudy.resolvedHeroImage) {
+    ogImageUrl = `https:${caseStudy.resolvedHeroImage}`;
+  }
+
+  const canonicalUrl = seoCanonicalOverride || `${BASE_URL}/case-study/${params.slug}`;
+
+  return {
+    title: `${seoTitle} | PH1 Research`,
+    description: seoDescription.substring(0, 160),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    robots: seoNoindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+    openGraph: {
+      title: seoTitle,
+      description: seoDescription.substring(0, 160),
+      url: canonicalUrl,
+      siteName: 'PH1 Research',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: seoTitle,
+        },
+      ],
+      locale: 'en_US',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seoTitle,
+      description: seoDescription.substring(0, 160),
+      images: [ogImageUrl],
+    },
+  };
+}
+
 export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
   const caseStudy = await getCaseStudy(params.slug);
-  
+
   if (!caseStudy) notFound();
-  
+
   const problemStatement = caseStudy.fields?.problemStatement || 'Case Study';
   const intro = caseStudy.fields?.intro ? renderRichText(caseStudy.fields.intro) : '';
   const projectVision = caseStudy.fields?.projectVision ? renderRichText(caseStudy.fields.projectVision) : '';
   const approach = caseStudy.fields?.approach ? renderRichText(caseStudy.fields.approach) : '';
   const outcomes = caseStudy.fields?.outcomes ? renderRichText(caseStudy.fields.outcomes) : '';
   const imageUrl = caseStudy.resolvedHeroImage ? `https:${caseStudy.resolvedHeroImage}` : null;
-  
+
   return (
     <main className="bg-white min-h-screen">
       <section className="notification-bar">
@@ -89,35 +168,35 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
         </div>
       )}
 
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <article className="max-w-4xl mx-auto px-4 py-16">
         {intro && (
           <div className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Overview</h2>
             <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: intro }} />
           </div>
         )}
-        
+
         {projectVision && (
           <div className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Vision</h2>
             <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: projectVision }} />
           </div>
         )}
-        
+
         {approach && (
           <div className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Our Approach</h2>
             <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: approach }} />
           </div>
         )}
-        
+
         {outcomes && (
           <div className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Outcomes</h2>
             <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: outcomes }} />
           </div>
         )}
-      </div>
+      </article>
     </main>
   );
 }

@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Content scraping error:', error);
     
     return NextResponse.json(

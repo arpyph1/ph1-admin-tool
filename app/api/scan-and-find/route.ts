@@ -56,13 +56,13 @@ async function scanDirectory(dir: string, baseDir: string, searchText: string, f
                 matches
               });
             }
-          } catch (error) {
+          } catch (error: any) {
             // Skip files we can't read
           }
         }
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error scanning ${dir}:`, error);
   }
   
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
       files: matches
     });
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error scanning:', error);
     return Response.json(
       { 

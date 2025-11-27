@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     console.log('Returning team member:', teamMember);
     return Response.json(teamMember);
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching team member:', error);
     return Response.json(
       { error: 'Failed to fetch team member' },

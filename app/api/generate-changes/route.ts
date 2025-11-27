@@ -10,7 +10,7 @@ export async function POST(request: Request) {
         try {
           const content = await fs.readFile(file.path, 'utf-8');
           return { ...file, content };
-        } catch (error) {
+        } catch (error: any) {
           return { ...file, content: null, error: 'Could not read file' };
         }
       })
@@ -133,7 +133,7 @@ Return ONLY raw JSON, no markdown.`,
       ...changes
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error generating changes:', error);
     return Response.json(
       { 

@@ -32,7 +32,7 @@ export async function GET(request: Request) {
       content,
       path: filePath
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Read file error:', error);
     return Response.json(
       { success: false, error: String(error) },

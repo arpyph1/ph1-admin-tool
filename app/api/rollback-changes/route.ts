@@ -27,7 +27,7 @@ export async function POST(request: Request) {
           success: true,
           message: 'Restored successfully'
         });
-      } catch (error) {
+      } catch (error: any) {
         results.push({
           file: backup.file,
           success: false,
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       results
     });
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error rolling back changes:', error);
     return Response.json(
       { 

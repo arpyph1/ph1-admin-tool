@@ -24,7 +24,7 @@ export async function GET() {
               filesModified: manifest.files?.filter((f: any) => f.success && f.replacements > 0).length || 0,
               totalReplacements: manifest.totalReplacements || 0,
             };
-          } catch (error) {
+          } catch (error: any) {
             return null;
           }
         })
@@ -40,7 +40,7 @@ export async function GET() {
       changes: validChanges
     });
     
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error reading change log:', error);
     return Response.json({
       success: true,

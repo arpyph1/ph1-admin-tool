@@ -41,22 +41,22 @@ async function getActualDesignSystem() {
     const html = bestPage.html;
     const classMatches = html.match(/class="([^"]+)"/g) || [];
     const allClasses = classMatches
-      .map(m => m.replace(/class="|"/g, ''))
+      .map((m: string) => m.replace(/class="|"/g, ''))
       .join(' ')
       .split(/\s+/);
-    
-    const bgClasses = allClasses.filter(c => c.startsWith('bg-'));
-    const textClasses = allClasses.filter(c => c.startsWith('text-'));
-    const spaceClasses = allClasses.filter(c => /^[pm][xylrtb]?-/.test(c));
+
+    const bgClasses = allClasses.filter((c: string) => c.startsWith('bg-'));
+    const textClasses = allClasses.filter((c: string) => c.startsWith('text-'));
+    const spaceClasses = allClasses.filter((c: string) => /^[pm][xylrtb]?-/.test(c));
     
     return {
       facts: 'PH1: 20+ years, Fortune 500 (Spotify, Microsoft, Dell, Mozilla, Bell, NFL)',
       referencePage: bestPage.slug,
       htmlSample: html.substring(0, 4000),
       patterns: {
-        backgrounds: [...new Set(bgClasses)].slice(0, 15),
-        text: [...new Set(textClasses)].slice(0, 15),
-        spacing: [...new Set(spaceClasses)].slice(0, 20)
+        backgrounds: Array.from(new Set(bgClasses)).slice(0, 15),
+        text: Array.from(new Set(textClasses)).slice(0, 15),
+        spacing: Array.from(new Set(spaceClasses)).slice(0, 20)
       }
     };
   } catch (e) {
@@ -132,7 +132,7 @@ ${isRefinement ? 'Changes made' : 'Page created'}
       
       let result = message.content[0].type === 'text' ? message.content[0].text : '';
       
-      const summaryMatch = result.match(/---SUMMARY---\s*(.+?)\s*---HTML---/s);
+      const summaryMatch = result.match(/---SUMMARY---\s*([\s\S]+?)\s*---HTML---/);
       const htmlMatch = result.match(/---HTML---\s*([\s\S]+?)\s*---END---/);
       
       if (!htmlMatch) {
