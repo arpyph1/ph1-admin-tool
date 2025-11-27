@@ -1,18 +1,26 @@
 import { createClient } from 'contentful';
 
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN!,
-});
+// Lazy client initialization to avoid build-time errors
+let client: ReturnType<typeof createClient> | null = null;
+
+function getClient() {
+  if (!client) {
+    client = createClient({
+      space: process.env.CONTENTFUL_SPACE_ID!,
+      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN!,
+    });
+  }
+  return client;
+}
 
 export async function getPage(slug: string) {
   try {
     // Try to fetch from different content types
     const contentTypes = ['trends', 'service', 'caseStudy', 'landingPage'];
-    
+
     for (const contentType of contentTypes) {
       try {
-        const entries = await client.getEntries({
+        const entries = await getClient().getEntries({
           content_type: contentType,
           'fields.key': slug,
           limit: 1,

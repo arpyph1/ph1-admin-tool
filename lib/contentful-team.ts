@@ -17,10 +17,18 @@ export interface TeamMember {
   ph1Url: string;
 }
 
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
-});
+// Lazy client initialization to avoid build-time errors
+let client: ReturnType<typeof createClient> | null = null;
+
+function getClient() {
+  if (!client) {
+    client = createClient({
+      space: process.env.CONTENTFUL_SPACE_ID!,
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
+    });
+  }
+  return client;
+}
 
 function extractPlainTextFromRichText(richText: Document): string {
   if (!richText || !richText.content) return '';
@@ -62,7 +70,7 @@ function mapTeamMember(entry: Entry<any>): TeamMember {
 
 export async function getAllTeamMembers(): Promise<TeamMember[]> {
   try {
-    const entries = await client.getEntries<any>({
+    const entries = await getClient().getEntries<any>({
       content_type: 'teamMember',
       order: 'fields.carouselPriority',
     });
@@ -76,7 +84,7 @@ export async function getAllTeamMembers(): Promise<TeamMember[]> {
 
 export async function getTeamMember(key: string): Promise<TeamMember | null> {
   try {
-    const entries = await client.getEntries<any>({
+    const entries = await getClient().getEntries<any>({
       content_type: 'teamMember',
       'fields.key': key,
       limit: 1,
@@ -122,7 +130,7 @@ CRITICAL INSTRUCTIONS FOR TEAM MEMBERS:
 
 export async function getTeamMembersByExpertise(expertise: string): Promise<TeamMember[]> {
   try {
-    const entries = await client.getEntries<any>({
+    const entries = await getClient().getEntries<any>({
       content_type: 'teamMember',
       'fields.expertise[match]': expertise,
     });
