@@ -1,32 +1,40 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { createClient } from 'contentful';
 
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
 
+// Lazy client initialization
+let client: ReturnType<typeof createClient> | null = null;
+
+function getClient() {
+  if (!client) {
+    client = createClient({
+      space: process.env.CONTENTFUL_SPACE_ID!,
+      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN!,
+    });
+  }
+  return client;
+}
+
 async function getBlogPost(slug: string) {
   try {
-    const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
-    const res = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&fields.key=${slug}&include=2&access_token=${token}`,
-      { cache: 'no-store' }
-    );
-    const data = await res.json();
+    const entries = await getClient().getEntries({
+      content_type: 'trends',
+      'fields.key': slug,
+      include: 2,
+      limit: 1,
+    });
 
-    if (!data.items || data.items.length === 0) return null;
+    if (entries.items.length === 0) return null;
 
-    const item = data.items[0];
-    const assetMap: Record<string, string> = {};
-    if (data.includes?.Asset) {
-      data.includes.Asset.forEach((asset: any) => {
-        assetMap[asset.sys.id] = asset.fields?.file?.url;
-      });
-    }
+    const item = entries.items[0];
+    const heroImage = item.fields?.heroImage as any;
 
-    const heroImageId = item.fields?.heroImage?.sys?.id;
     return {
       ...item,
-      resolvedHeroImage: heroImageId ? assetMap[heroImageId] : null
+      resolvedHeroImage: heroImage?.fields?.file?.url || null
     };
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -44,38 +52,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
   }
 
-  const getField = (fieldName: string) => {
-    const field = post.fields?.[fieldName];
-    return field ? (field['en-US'] || field) : null;
-  };
-
-  const title = getField('title') || 'Blog Post';
-  const seoTitle = getField('seoTitle') || title;
-  const seoDescription = getField('seoDescription') || getField('excerpt') || getField('heroSubheadline') || `Read ${title} on PH1 Research`;
-  const seoCanonicalOverride = getField('seoCanonicalOverride');
-  const seoNoindex = getField('seoNoindex') === true;
-  const seoOgImageId = getField('seoOgImage')?.sys?.id;
+  const fields = post.fields as any;
+  const title = fields?.title || 'Blog Post';
+  const seoTitle = fields?.seoTitle || title;
+  const seoDescription = fields?.seoDescription || fields?.excerpt || fields?.heroSubheadline || `Read ${title} on PH1 Research`;
+  const seoCanonicalOverride = fields?.seoCanonicalOverride;
+  const seoNoindex = fields?.seoNoindex === true;
 
   // Resolve OG image: seoOgImage > heroImage > default
   let ogImageUrl = DEFAULT_OG_IMAGE;
-  if (seoOgImageId && post.resolvedHeroImage) {
-    // Check if we have the SEO OG image in assets
-    const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
-    try {
-      const assetRes = await fetch(
-        `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/assets/${seoOgImageId}?access_token=${token}`,
-        { cache: 'no-store' }
-      );
-      const assetData = await assetRes.json();
-      if (assetData.fields?.file?.url) {
-        ogImageUrl = `https:${assetData.fields.file.url}`;
-      }
-    } catch {
-      // Fall back to hero image
-      if (post.resolvedHeroImage) {
-        ogImageUrl = `https:${post.resolvedHeroImage}`;
-      }
-    }
+  const seoOgImage = fields?.seoOgImage as any;
+  if (seoOgImage?.fields?.file?.url) {
+    ogImageUrl = `https:${seoOgImage.fields.file.url}`;
   } else if (post.resolvedHeroImage) {
     ogImageUrl = `https:${post.resolvedHeroImage}`;
   }
@@ -121,13 +109,9 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   if (!post) notFound();
 
-  const getField = (fieldName: string) => {
-    const field = post.fields?.[fieldName];
-    return field ? (field['en-US'] || field) : null;
-  };
-
-  const title = getField('title') || 'Blog Post';
-  const publishedDate = getField('publishedDate') || post.sys?.createdAt;
+  const fields = post.fields as any;
+  const title = fields?.title || 'Blog Post';
+  const publishedDate = fields?.publishedDate || post.sys?.createdAt;
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
 
   // Format date for display
