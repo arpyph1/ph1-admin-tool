@@ -20,12 +20,23 @@ function getClient() {
 
 async function getBlogPost(slug: string) {
   try {
-    const entries = await getClient().getEntries({
+    // Try urlKey first (primary field for trends)
+    let entries = await getClient().getEntries({
       content_type: 'trends',
-      'fields.key': slug,
+      'fields.urlKey': slug,
       include: 2,
       limit: 1,
     });
+
+    // Fall back to key if urlKey doesn't match
+    if (entries.items.length === 0) {
+      entries = await getClient().getEntries({
+        content_type: 'trends',
+        'fields.key': slug,
+        include: 2,
+        limit: 1,
+      });
+    }
 
     if (entries.items.length === 0) return null;
 
