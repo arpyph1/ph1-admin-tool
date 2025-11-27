@@ -8,7 +8,7 @@ async function getBlogPost(slug: string) {
   try {
     const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
     const res = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&fields.urlKey=${slug}&include=2&access_token=${token}`,
+      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&fields.key=${slug}&include=2&access_token=${token}`,
       { cache: 'no-store' }
     );
     const data = await res.json();
