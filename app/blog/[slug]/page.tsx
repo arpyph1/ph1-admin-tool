@@ -214,21 +214,17 @@ export default async function BlogPage({ params }: { params: { slug: string } })
         </div>
       </section>
 
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <header className="header">
+        <div className="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
           <a href="/" className="flex items-center">
-            <img src="/_blog/images/logo.svg" alt="PH1.ca" className="h-8" />
+            <img src="/images/logo.svg" alt="PH1.ca" className="h-10" />
           </a>
           <nav className="flex gap-8 items-center">
-            <a href="/" className="font-normal text-sm text-gray-800 hover:text-[#51c2e7] transition-colors">Services</a>
-            <a href="/#work" className="font-normal text-sm text-gray-800 hover:text-[#51c2e7] transition-colors">Our Work</a>
-            <a href="/" className="font-normal text-sm text-gray-800 hover:text-[#51c2e7] transition-colors">Training</a>
-            <a href="/" className="font-normal text-sm text-gray-800 hover:text-[#51c2e7] transition-colors">About</a>
-            <a href="/#contact" className="text-gray-800 hover:text-[#51c2e7] transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </a>
+            <a href="/" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Services</a>
+            <a href="/#work" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Our Work</a>
+            <a href="/" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Training</a>
+            <a href="/about" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">About</a>
+            <a href="/#contact" className="bg-[#ffc72d] px-5 py-2 font-bold text-sm text-black hover:bg-[#fab700] transition-colors">Contact</a>
           </nav>
         </div>
       </header>
