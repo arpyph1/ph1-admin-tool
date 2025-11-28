@@ -236,6 +236,44 @@ export default async function BlogPage({ params }: { params: { slug: string } })
           <p className="text-xl text-gray-600">Content coming soon.</p>
         )}
       </article>
+
+      <footer>
+        <article className="row footer-top-row">
+          <h3 className="footer__header">PH1 RESEARCH INC.</h3>
+          <hr className="footer__hr" />
+
+          <div className="column one-third">
+            <span className="footer__text">
+              1863 Alberni Street #703<br />
+              Vancouver, BC<br />
+              <br />
+              info@ph1.ca<br />
+              (604) 373-3213
+            </span>
+          </div>
+          <div className="column one-third">
+            <span>
+              <a className="link link--block footer__link" href="/services/cx/customer-experience-audits">CX Research & Strategy</a>
+              <a className="link link--block footer__link" href="/user-experience">Usability & Accessibility Testing</a>
+            </span>
+          </div>
+          <div className="column one-third">
+            <span>
+              <a className="link link--block footer__link" href="/">Home</a>
+              <a className="link link--block footer__link" href="/contact">Contact us</a>
+              <a className="link link--block footer__link" href="/agency">Agency</a>
+              <a className="link link--block footer__link" href="/clients">Clients</a>
+            </span>
+          </div>
+        </article>
+        <div className="footer-bottom-row">
+          <div className="row">
+            <div className="column whole">
+              <span className="footer__text">© 2026 PH1 Research Inc.</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
