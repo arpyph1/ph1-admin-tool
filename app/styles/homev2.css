@@ -202,10 +202,10 @@
 }
 
 .notification-bar .row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 16px !important;
 }
 
 .btn--small {
