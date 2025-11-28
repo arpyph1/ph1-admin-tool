@@ -190,8 +190,8 @@ export default async function BlogPage({ params }: { params: { slug: string } })
   const publishedDate = fields?.publishedDate || post.sys?.createdAt;
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
 
-  // Get content from summaryRich or body field
-  const content = fields?.summaryRich || fields?.body || fields?.content || null;
+  // Get content from trendContentRich (full body) with fallback to summaryRich (preview)
+  const content = fields?.trendContentRich || fields?.summaryRich || fields?.body || fields?.content || null;
   const renderedContent = content ? renderRichText(content) : '';
 
   // Format date for display
