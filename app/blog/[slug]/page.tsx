@@ -185,6 +185,11 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   const fields = post.fields as any;
 
+  // DEBUG: Log ALL field names to identify the correct content field
+  console.log('=== BLOG DEBUG: All field names ===');
+  console.log(JSON.stringify(Object.keys(fields || {})));
+  console.log('=== END DEBUG ===');
+
   const title = fields?.title || 'Blog Post';
   const subtitle = fields?.subtitle || fields?.heroSubheadline || '';
   const author = fields?.author || '';
