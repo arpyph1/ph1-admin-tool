@@ -185,23 +185,15 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   const fields = post.fields as any;
 
-  // DEBUG: Log all available field names
-  console.log('=== BLOG POST DEBUG ===');
-  console.log('Available fields:', Object.keys(fields || {}));
-  console.log('Has trendContentRich:', !!fields?.trendContentRich);
-  console.log('Has summaryRich:', !!fields?.summaryRich);
-  console.log('Has body:', !!fields?.body);
-  console.log('Has content:', !!fields?.content);
-  console.log('=== END DEBUG ===');
-
   const title = fields?.title || 'Blog Post';
   const subtitle = fields?.subtitle || fields?.heroSubheadline || '';
   const author = fields?.author || '';
   const publishedDate = fields?.publishedDate || post.sys?.createdAt;
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
 
-  // Get content from trendContentRich (full body) with fallback to summaryRich (preview)
-  const content = fields?.trendContentRich || fields?.summaryRich || fields?.body || fields?.content || null;
+  // Get content from trend_contentRich (full body) with fallback to summaryRich (preview)
+  // Note: Contentful field ID uses underscore: trend_contentRich
+  const content = fields?.trend_contentRich || fields?.trendContentRich || fields?.summaryRich || null;
   const renderedContent = content ? renderRichText(content) : '';
 
   // Format date for display
