@@ -222,6 +222,20 @@
   margin-left: 20px;
 }
 
+/* HEADER SOCIAL MEDIA SECTION */
+.header__social-media {
+  display: flex;
+  align-items: center;
+}
+
+.header__nav-sm-icon {
+  color: #000;
+}
+
+.header__nav-sm--media:hover .header__nav-sm-icon {
+  color: var(--color-highlight-primary);
+}
+
 @media only screen and (max-width: 680px) {
   .hero {
     min-height: 800px;

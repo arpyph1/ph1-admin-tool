@@ -39,11 +39,19 @@ To manage risk during the build process, the blog template was branched and chan
 |-------|--------|-------------|
 | `trendContentRich` not displaying | **RESOLVED** | The body content (rich text field) was not rendering on the page |
 | `summaryRich` not showing | **RESOLVED** | The intro text (summary rich text field) was not displaying |
-| Navigation styling mismatch | **PENDING** | The navigation styling/design needs to match the ph1.ca homepage |
+| Navigation styling mismatch | **RESOLVED** | The navigation styling/design now matches the ph1.ca homepage |
 
 #### Pending Work
 
-- **Navigation Styling**: During the template editing process, the navigation code was modified and no longer matches the styling and design of the ph1.ca homepage. The navigation needs to be updated to use the same styling as the main site's homepage header.
+- ~~**Navigation Styling**: During the template editing process, the navigation code was modified and no longer matches the styling and design of the ph1.ca homepage. The navigation needs to be updated to use the same styling as the main site's homepage header.~~ **RESOLVED**
+
+#### Navigation Fix (November 28, 2025)
+
+The blog template navigation was updated to match the ph1.ca homepage:
+- Changed header class from `header active-scroll--notification-bar` to just `header`
+- Changed `header__side-section` to `header__social-media` to match homepage
+- Added `header__nav-sm--media` class to email link for proper hover styling
+- Added CSS for `.header__social-media` and icon colors in `homev2.css`
 
 #### Related Commits
 

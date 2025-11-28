@@ -214,7 +214,7 @@ export default async function BlogPage({ params }: { params: { slug: string } })
         </div>
       </section>
 
-      <header className="header active-scroll--notification-bar">
+      <header className="header">
         <a className="header_link" href="/">
           <img className="header__img" src="/images/logo.svg" alt="Site logo" />
         </a>
@@ -240,8 +240,8 @@ export default async function BlogPage({ params }: { params: { slug: string } })
             </a>
           </div>
         </nav>
-        <div className="header__side-section">
-          <a href="/contact" className="header__nav-sm">
+        <div className="header__social-media">
+          <a href="/contact" className="header__nav-sm header__nav-sm--media">
             <i className="fa fa-envelope header__nav-sm-icon" aria-hidden="true"></i>
           </a>
         </div>
