@@ -1,35 +1,29 @@
-/* COLORS */
-var(--color-primary): #000;
-var(--color-secondary): #272727;
-var(--color-tertiary): #ffc72d;
-var(--color-tertiary)_hover: #fab700;
+:root {
+  /* COLORS */
+  --color-primary: #000;
+  --color-secondary: #272727;
+  --color-tertiary: #ffc72d;
+  --color-tertiary-hover: #fab700;
 
-var(--color-highlight-primary): #51c2e7;
-var(--color-highlight-secondary): #ffc72d;
-var(--color-highlight-primary)_hover: #1da6d3;
+  --color-highlight-primary: #51c2e7;
+  --color-highlight-secondary: #ffc72d;
+  --color-highlight-primary-hover: #1da6d3;
 
-var(--color-grey): #f5f5f5;
-var(--color-grey)_v2: #7a7a7a;
-var(--color-light-grey): #d9d9d9;
-var(--color-light-v2-grey): #f5f5f6;
+  --color-grey: #f5f5f5;
+  --color-grey-v2: #7a7a7a;
+  --color-light-grey: #d9d9d9;
+  --color-light-v2-grey: #f5f5f6;
 
-var(--text-color): #010101;
+  --text-color: #010101;
 
-/* HEADER SPECIFIC */
+  /* HEADER SPECIFIC */
+  --header-height: 72px;
+  --header-index: 100;
 
-var(--header-height): 72px;
-var(--header-index): 100;
+  /* BREAK POINTS */
+  --mobile-brake-p: 780px;
 
-/* BREAK POINTS */
-
-$mobile: 780px;
-$desktop: 1024px;
-$xl-desktop: 1440px;
-
-var(--mobile-brake-p): $mobile;
-
-/* OTHERS */
-
-var(--initial-section-height): 41rem;
-
-var(--svg-banner-index): -2;
+  /* OTHERS */
+  --initial-section-height: 41rem;
+  --svg-banner-index: -2;
+}
