@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { createClient } from 'contentful';
-import Header from '../../components/Header';
 
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
@@ -207,8 +206,44 @@ export default async function BlogPage({ params }: { params: { slug: string } })
     : null;
 
   return (
-    <main className="bg-white min-h-screen pt-14">
-      <Header />
+    <main className="bg-white min-h-screen">
+      <section className="notification-bar">
+        <span>Design of AI podcast: The podcast for product teams</span>
+        <a href="https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf" className="notification-bar__btn" rel="noopener noreferrer">List of episodes</a>
+      </section>
+
+      <header className="header active-scroll--notification-bar">
+        <a className="header_link" href="/">
+          <img className="header__img" src="/images/logo.svg" alt="Site logo" />
+        </a>
+        <div className="flex-grow only-on-mobiles"></div>
+        <div className="hamburger only-on-mobiles">
+          <div className="hamburger-box">
+            <div className="hamburger-inner"></div>
+          </div>
+        </div>
+        <nav className="header__nav">
+          <div className="header__nav-wrap">
+            <a href="/services" className="header__nav-item">
+              <span className="header__nav-item-span">Services</span>
+            </a>
+            <a href="/#work" className="header__nav-item">
+              <span className="header__nav-item-span">Our Work</span>
+            </a>
+            <a href="/training" className="header__nav-item">
+              <span className="header__nav-item-span">Training</span>
+            </a>
+            <a href="/agency" className="header__nav-item">
+              <span className="header__nav-item-span">About</span>
+            </a>
+          </div>
+        </nav>
+        <div className="header__side-section">
+          <a href="/contact" className="header__nav-sm">
+            <i className="fa fa-envelope header__nav-sm-icon" aria-hidden="true"></i>
+          </a>
+        </div>
+      </header>
 
       {imageUrl && (
         <div className="w-full h-[500px] relative">

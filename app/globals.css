@@ -7,7 +7,8 @@
 @import './styles/original/variables.css';
 @import './styles/original/global.css';
 @import './styles/original/grid.css';
-@import './styles/original/header.css';
+@import './styles/original/v2/header.css';
+@import './styles/homev2/atoms.css';
 @import './styles/original/footer.css';
 @import './styles/original/animation.css';
 @import './styles/original/btn.css';
