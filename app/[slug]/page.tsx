@@ -1,6 +1,7 @@
 import { getPage } from '@/lib/contentful';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import Header from '../components/Header';
 
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
@@ -185,27 +186,7 @@ export default async function DynamicPage({ params }: { params: { slug: string }
 
   return (
     <main className="bg-white">
-      <section className="notification-bar">
-        <div className="max-w-7xl mx-auto px-4 flex justify-center items-center gap-4">
-          <span className="text-sm">Design of AI podcast: The podcast for product teams</span>
-          <a href="https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf" className="bg-[#ffc72d] text-black px-3 py-1.5 font-bold text-xs hover:bg-[#fab700]">List of episodes</a>
-        </div>
-      </section>
-
-      <header className="header">
-        <div className="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
-          <a href="/" className="flex items-center">
-            <img src="/images/logo.svg" alt="PH1.ca" className="h-10" />
-          </a>
-          <nav className="flex gap-8 items-center">
-            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Services</a>
-            <a href="#work" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Our Work</a>
-            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Training</a>
-            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">About</a>
-            <a href="#contact" className="bg-[#ffc72d] px-5 py-2 font-bold text-sm text-black hover:bg-[#fab700] transition-colors">Contact</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <div className="bg-white">
         <section className="bg-white pt-12 pb-10 md:pt-20 md:pb-16">
