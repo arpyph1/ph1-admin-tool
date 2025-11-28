@@ -23,7 +23,7 @@ This document tracks development history, issues, and resolutions for the PH1.ca
 
 **Date**: November 2025
 **Branch**: `claude/fix-blog-seo-indexing-*`
-**Status**: In Progress
+**Status**: Resolved
 
 #### Problem Description
 
@@ -44,6 +44,7 @@ To manage risk during the build process, the blog template was branched and chan
 #### Pending Work
 
 - ~~**Navigation Styling**: During the template editing process, the navigation code was modified and no longer matches the styling and design of the ph1.ca homepage. The navigation needs to be updated to use the same styling as the main site's homepage header.~~ **RESOLVED**
+- ~~**SEO Indexing Fix**: The blog template needed `export const dynamic = 'force-dynamic'` and proper fetch API with cache control for SEO crawlers to properly index pages.~~ **RESOLVED**
 
 #### Navigation Fix (November 28, 2025)
 
@@ -52,6 +53,18 @@ The blog template navigation was updated to match the ph1.ca homepage:
 - Changed `header__side-section` to `header__social-media` to match homepage
 - Added `header__nav-sm--media` class to email link for proper hover styling
 - Added CSS for `.header__social-media` and icon colors in `homev2.css`
+
+#### SEO Indexing Fix (November 28, 2025)
+
+The blog template was updated to ensure proper SEO indexing by Google:
+- Added `export const dynamic = 'force-dynamic'` to ensure server-side rendering for SEO crawlers
+- Replaced Contentful SDK with direct `fetch` API using `{ cache: 'no-store' }` for explicit cache control
+- Updated asset resolution to use proper asset map pattern (matching case study page approach)
+
+These changes ensure that:
+1. Blog pages are always server-rendered with fresh content for crawlers
+2. Metadata (title, description, canonical URL, robots, OpenGraph, Twitter cards) is properly generated
+3. Cache behavior is explicit and consistent with other page templates
 
 #### Related Commits
 

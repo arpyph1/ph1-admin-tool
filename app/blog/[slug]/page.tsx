@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { createClient } from 'contentful';
+
+// Force dynamic rendering for proper SEO indexing
+export const dynamic = 'force-dynamic';
 
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
@@ -78,37 +80,35 @@ function renderRichText(content: any): string {
   return renderRichTextNode(content);
 }
 
-// Lazy client initialization
-let client: ReturnType<typeof createClient> | null = null;
-
-function getClient() {
-  if (!client) {
-    client = createClient({
-      space: process.env.CONTENTFUL_SPACE_ID!,
-      accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN!,
-    });
-  }
-  return client;
-}
-
 async function getBlogPost(slug: string) {
   try {
+    const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
     // Query by 'key' field (the slug field for trends content type)
-    const entries = await getClient().getEntries({
-      content_type: 'trends',
-      'fields.key': slug,
-      include: 2,
-      limit: 1,
-    });
+    const res = await fetch(
+      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&fields.key=${slug}&include=2&limit=1&access_token=${token}`,
+      { cache: 'no-store' }
+    );
+    const data = await res.json();
 
-    if (entries.items.length === 0) return null;
+    if (!data.items || data.items.length === 0) return null;
 
-    const item = entries.items[0];
-    const heroImage = item.fields?.heroImage as any;
+    const item = data.items[0];
+
+    // Build asset map for resolving images
+    const assetMap: Record<string, string> = {};
+    if (data.includes?.Asset) {
+      data.includes.Asset.forEach((asset: any) => {
+        assetMap[asset.sys.id] = asset.fields?.file?.url;
+      });
+    }
+
+    const heroImageId = item.fields?.heroImage?.sys?.id;
+    const seoOgImageId = item.fields?.seoOgImage?.sys?.id;
 
     return {
       ...item,
-      resolvedHeroImage: heroImage?.fields?.file?.url || null
+      resolvedHeroImage: heroImageId ? assetMap[heroImageId] : null,
+      resolvedSeoOgImage: seoOgImageId ? assetMap[seoOgImageId] : null
     };
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -135,9 +135,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   // Resolve OG image: seoOgImage > heroImage > default
   let ogImageUrl = DEFAULT_OG_IMAGE;
-  const seoOgImage = fields?.seoOgImage as any;
-  if (seoOgImage?.fields?.file?.url) {
-    ogImageUrl = `https:${seoOgImage.fields.file.url}`;
+  if (post.resolvedSeoOgImage) {
+    ogImageUrl = `https:${post.resolvedSeoOgImage}`;
   } else if (post.resolvedHeroImage) {
     ogImageUrl = `https:${post.resolvedHeroImage}`;
   }
