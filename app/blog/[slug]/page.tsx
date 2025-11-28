@@ -185,9 +185,13 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   const fields = post.fields as any;
 
-  // DEBUG: Log ALL field names to identify the correct content field
-  console.log('=== BLOG DEBUG: All field names ===');
-  console.log(JSON.stringify(Object.keys(fields || {})));
+  // DEBUG: Check trendContentRich field
+  console.log('=== BLOG DEBUG ===');
+  console.log('Fields available:', Object.keys(fields || {}));
+  console.log('trendContentRich exists:', !!fields?.trendContentRich);
+  console.log('trendContentRich nodeType:', fields?.trendContentRich?.nodeType);
+  console.log('trendContentRich content length:', fields?.trendContentRich?.content?.length);
+  console.log('summaryRich exists:', !!fields?.summaryRich);
   console.log('=== END DEBUG ===');
 
   const title = fields?.title || 'Blog Post';
@@ -196,9 +200,8 @@ export default async function BlogPage({ params }: { params: { slug: string } })
   const publishedDate = fields?.publishedDate || post.sys?.createdAt;
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
 
-  // Get content from trend_contentRich (full body) with fallback to summaryRich (preview)
-  // Note: Contentful field ID uses underscore: trend_contentRich
-  const content = fields?.trend_contentRich || fields?.trendContentRich || fields?.summaryRich || null;
+  // Get content from trendContentRich (full body) with fallback to summaryRich (preview)
+  const content = fields?.trendContentRich || fields?.summaryRich || null;
   const renderedContent = content ? renderRichText(content) : '';
 
   // Format date for display
