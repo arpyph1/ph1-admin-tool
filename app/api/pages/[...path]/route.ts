@@ -11,7 +11,7 @@ export async function GET(
     const parsed = parsePageFile(pagePath)
     
     return NextResponse.json(parsed)
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }

@@ -17,25 +17,10 @@ export interface TeamMember {
   ph1Url: string;
 }
 
-// Lazy client initialization to avoid build-time errors
-let client: ReturnType<typeof createClient> | null = null;
-
-function getClient() {
-  if (!client) {
-    const accessToken = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
-    const spaceId = process.env.CONTENTFUL_SPACE_ID;
-
-    if (!accessToken || !spaceId) {
-      throw new Error('Contentful configuration missing: CONTENTFUL_SPACE_ID and CONTENTFUL_DELIVERY_TOKEN (or CONTENTFUL_ACCESS_TOKEN) are required');
-    }
-
-    client = createClient({
-      space: spaceId,
-      accessToken: accessToken,
-    });
-  }
-  return client;
-}
+const client = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID!,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
+});
 
 function extractPlainTextFromRichText(richText: Document): string {
   if (!richText || !richText.content) return '';
@@ -75,31 +60,23 @@ function mapTeamMember(entry: Entry<any>): TeamMember {
   };
 }
 
-// Helper to sanitize error messages (remove tokens from URLs)
-function sanitizeError(error: unknown): string {
-  if (error instanceof Error) {
-    return error.message.replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]');
-  }
-  return String(error).replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]');
-}
-
 export async function getAllTeamMembers(): Promise<TeamMember[]> {
   try {
-    const entries = await getClient().getEntries<any>({
+    const entries = await client.getEntries<any>({
       content_type: 'teamMember',
       order: 'fields.carouselPriority',
     });
 
     return entries.items.map(entry => mapTeamMember(entry));
   } catch (error) {
-    console.error('Error fetching team members from Contentful:', sanitizeError(error));
+    console.error('Error fetching team members from Contentful:', error);
     return [];
   }
 }
 
 export async function getTeamMember(key: string): Promise<TeamMember | null> {
   try {
-    const entries = await getClient().getEntries<any>({
+    const entries = await client.getEntries<any>({
       content_type: 'teamMember',
       'fields.key': key,
       limit: 1,
@@ -111,7 +88,7 @@ export async function getTeamMember(key: string): Promise<TeamMember | null> {
 
     return mapTeamMember(entries.items[0]);
   } catch (error) {
-    console.error(`Error fetching team member ${key}:`, sanitizeError(error));
+    console.error(`Error fetching team member ${key}:`, error);
     return null;
   }
 }
@@ -145,14 +122,14 @@ CRITICAL INSTRUCTIONS FOR TEAM MEMBERS:
 
 export async function getTeamMembersByExpertise(expertise: string): Promise<TeamMember[]> {
   try {
-    const entries = await getClient().getEntries<any>({
+    const entries = await client.getEntries<any>({
       content_type: 'teamMember',
       'fields.expertise[match]': expertise,
     });
 
     return entries.items.map(entry => mapTeamMember(entry));
   } catch (error) {
-    console.error(`Error fetching team members by expertise ${expertise}:`, sanitizeError(error));
+    console.error(`Error fetching team members by expertise ${expertise}:`, error);
     return [];
   }
 }

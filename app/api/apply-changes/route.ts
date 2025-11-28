@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           originalSize: originalContent.length
         });
         console.log('✓ Backed up:', change.file);
-      } catch (error: any) {
+      } catch (error) {
         console.error(`✗ Error backing up ${change.file}:`, error);
       }
     }
@@ -111,7 +111,7 @@ export async function POST(request: Request) {
           });
         }
         
-      } catch (error: any) {
+      } catch (error) {
         console.error('✗ Error processing change:', error);
         results.push({
           file: change.file,
@@ -147,7 +147,7 @@ export async function POST(request: Request) {
       backupPath: `.backups/${backupId}`
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error applying changes:', error);
     return Response.json(
       { 

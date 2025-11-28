@@ -67,7 +67,7 @@ GENERATION INSTRUCTIONS:
       },
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Content generation error:', error);
     return Response.json(
       { 

@@ -117,7 +117,7 @@ Return ONLY the JSON, no other text.`,
       contentfulId: createdEntry.sys.id,
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error creating team member:', error);
     return Response.json(
       { 

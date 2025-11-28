@@ -6,7 +6,7 @@ export default function GeneratePage() {
   const [step, setStep] = useState<'input' | 'questions' | 'generating' | 'review' | 'published'>('input')
   const [prompt, setPrompt] = useState('')
   const [questions, setQuestions] = useState<string[]>([])
-  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [answers, setAnswers] = useState({})
   const [code, setCode] = useState('')
   const [slug, setSlug] = useState('')
   const [error, setError] = useState('')
@@ -22,8 +22,8 @@ export default function GeneratePage() {
       const data = await res.json()
       setQuestions((data.questions || []).map((q: any) => typeof q === 'string' ? q : String(q)))
       setStep('questions')
-    } catch (err: any) {
-      setError(err?.message || 'An error occurred')
+    } catch (err) {
+      setError(err.message)
       setStep('input')
     }
   }
@@ -40,8 +40,8 @@ export default function GeneratePage() {
       setCode(data.code)
       setSlug(data.slug)
       setStep('review')
-    } catch (err: any) {
-      setError(err?.message || 'An error occurred')
+    } catch (err) {
+      setError(err.message)
       setStep('input')
     }
   }
@@ -54,8 +54,8 @@ export default function GeneratePage() {
         body: JSON.stringify({ code, slug })
       })
       setStep('published')
-    } catch (err: any) {
-      setError(err?.message || 'An error occurred')
+    } catch (err) {
+      setError(err.message)
     }
   }
 

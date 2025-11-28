@@ -105,7 +105,7 @@ export async function POST(request: Request) {
           });
         }
 
-      } catch (error: any) {
+      } catch (error) {
         results.push({
           entryId: entry.entryId,
           entryName: entry.entryName,
@@ -133,14 +133,14 @@ export async function POST(request: Request) {
     return Response.json({
       success: true,
       message: 'Changes applied successfully',
-      entriesModified: results.filter(r => r.success && (r.replacements ?? 0) > 0).length,
+      entriesModified: results.filter(r => r.success && r.replacements > 0).length,
       totalReplacements,
       backupId,
       backupPath: `.backups/${backupId}`,
       results
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error replacing in Contentful:', error);
     return Response.json(
       { success: false, error: error instanceof Error ? error.message : 'Unknown error' },

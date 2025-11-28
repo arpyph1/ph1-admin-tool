@@ -84,7 +84,7 @@ RESPOND WITH:
     }
 
     return Response.json({ success: true, previews });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Preview error:', error);
     return Response.json(
       { success: false, error: 'Preview generation failed: ' + error },

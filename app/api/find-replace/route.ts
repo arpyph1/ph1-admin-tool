@@ -48,7 +48,7 @@ export async function POST(request: Request) {
         const matches = (originalContent.match(new RegExp(searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
         
         // Replace
-        const newContent = originalContent.split(searchText).join(replacementText);
+        const newContent = originalContent.replaceAll(searchText, replacementText);
         
         if (newContent !== originalContent) {
           await fs.writeFile(filePath, newContent, 'utf-8');
@@ -69,7 +69,7 @@ export async function POST(request: Request) {
           });
         }
         
-      } catch (error: any) {
+      } catch (error) {
         console.error('✗ Error:', error);
         results.push({
           file: relativePath,
@@ -96,19 +96,19 @@ export async function POST(request: Request) {
     
     console.log('\n=== SUMMARY ===');
     console.log('Total replacements:', totalReplacements);
-    console.log('Files modified:', results.filter(r => r.success && (r.replacements ?? 0) > 0).length);
-
+    console.log('Files modified:', results.filter(r => r.success && r.replacements > 0).length);
+    
     return Response.json({
       success: true,
       message: 'Changes applied successfully',
-      filesModified: results.filter(r => r.success && (r.replacements ?? 0) > 0).length,
+      filesModified: results.filter(r => r.success && r.replacements > 0).length,
       totalReplacements,
       backupId,
       backupPath: `.backups/${backupId}`,
       results
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error applying find-replace:', error);
     return Response.json(
       { 

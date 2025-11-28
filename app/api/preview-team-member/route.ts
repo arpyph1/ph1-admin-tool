@@ -55,7 +55,7 @@ CRITICAL: Do not wrap the JSON in markdown code blocks. Return raw JSON only.`,
       teamMember: updatedData,
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error generating preview:', error);
     return Response.json(
       { 

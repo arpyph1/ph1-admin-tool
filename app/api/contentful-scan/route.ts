@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       entries: matches
     });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error scanning Contentful:', error);
     return Response.json(
       { success: false, error: error instanceof Error ? error.message : 'Unknown error' },

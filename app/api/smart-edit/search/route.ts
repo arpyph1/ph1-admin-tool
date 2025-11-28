@@ -29,7 +29,7 @@ async function findIncludedBy(filePath: string): Promise<string[]> {
   return includers;
 }
 
-function getPageUrl(filePath: string): string {
+async function getPageUrl(filePath: string): string {
   // Convert file path to likely URL
   if (filePath.includes('/homev2/')) return '/';
   if (filePath.includes('/about/')) return '/about';
@@ -87,7 +87,7 @@ async function searchInFile(filePath: string, query: string): Promise<any | null
       purpose,
       impactedPages: includedBy.length > 0 ? includedBy : [relativePath]
     };
-  } catch (error: any) {
+  } catch (error) {
     return null;
   }
 }
@@ -111,7 +111,7 @@ async function searchAllFiles(dir: string, query: string): Promise<any[]> {
         if (result) results.push(result);
       }
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error searching files:', error);
   }
   
@@ -136,7 +136,7 @@ export async function POST(request: Request) {
       results,
       query
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Search error:', error);
     return Response.json(
       { success: false, error: 'Search failed' },

@@ -1,9 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-// Force dynamic to prevent build-time pre-rendering
-export const dynamic = 'force-dynamic';
-
 const REPO_PATH = process.env.REPO_PATH || path.join(process.cwd(), '../ph1-live');
 
 async function getAllTemplates(dir: string, baseDir: string = dir): Promise<any[]> {

@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const { find, replace } = await request.json()
     const result = findAndReplace(find, replace, 'all')
     return NextResponse.json(result)
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json({
       success: false,
       message: (error as Error).message

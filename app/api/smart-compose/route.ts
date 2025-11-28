@@ -73,33 +73,32 @@ export async function POST(request: NextRequest) {
       const components: any[] = [];
       
       for (const page of selected) {
-        const p = page as any;
-        if (p.type === 'homePage') {
-          if (p.h1) components.push({
-            id: `${p.id}-hero`,
-            label: 'Homepage Hero',
-            page: p.title,
-            html: p.h1.substring(0, 200)
+        if (page.type === 'homePage') {
+          if (page.h1) components.push({ 
+            id: `${page.id}-hero`, 
+            label: 'Homepage Hero', 
+            page: page.title, 
+            html: page.h1.substring(0, 200) 
           });
-          if (p.subtitle) components.push({
-            id: `${p.id}-subtitle`,
-            label: 'Homepage Subtitle',
-            page: p.title,
-            html: p.subtitle.substring(0, 200)
+          if (page.subtitle) components.push({ 
+            id: `${page.id}-subtitle`, 
+            label: 'Homepage Subtitle', 
+            page: page.title, 
+            html: page.subtitle.substring(0, 200) 
           });
-        } else if (p.type === 'service') {
-          if (p.heroText) components.push({
-            id: `${p.id}-hero`,
-            label: `${p.title} Hero`,
-            page: p.title,
-            html: p.heroText.substring(0, 200)
+        } else if (page.type === 'service') {
+          if (page.heroText) components.push({ 
+            id: `${page.id}-hero`, 
+            label: `${page.title} Hero`, 
+            page: page.title, 
+            html: page.heroText.substring(0, 200) 
           });
-        } else if (p.type === 'caseStudy') {
-          if (p.problem) components.push({
-            id: `${p.id}-problem`,
-            label: `${p.title} Problem`,
-            page: p.title,
-            html: p.problem.substring(0, 200)
+        } else if (page.type === 'caseStudy') {
+          if (page.problem) components.push({ 
+            id: `${page.id}-problem`, 
+            label: `${page.title} Problem`, 
+            page: page.title, 
+            html: page.problem.substring(0, 200) 
           });
         }
       }

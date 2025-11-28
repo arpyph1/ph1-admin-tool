@@ -15,7 +15,7 @@ export async function POST() {
         images: content.images.length
       }
     })
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json({
       success: false,
       message: `Import failed: ${(error as Error).message}`

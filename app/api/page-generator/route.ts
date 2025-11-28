@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const data = await request.json()
     const result = createPage(data.slug, data.template, data)
     return NextResponse.json(result)
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json({
       success: false,
       message: (error as Error).message

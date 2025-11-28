@@ -1,8 +1,5 @@
 import { getTeamMember } from '@/lib/contentful-team';
 
-// Force dynamic rendering to avoid static generation errors
-export const dynamic = 'force-dynamic';
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -27,7 +24,7 @@ export async function GET(request: Request) {
     console.log('Returning team member:', teamMember);
     return Response.json(teamMember);
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching team member:', error);
     return Response.json(
       { error: 'Failed to fetch team member' },
