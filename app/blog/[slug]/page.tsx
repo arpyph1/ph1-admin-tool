@@ -208,8 +208,10 @@ export default async function BlogPage({ params }: { params: { slug: string } })
   return (
     <main className="bg-white min-h-screen">
       <section className="notification-bar">
-        <span>Design of AI podcast: The podcast for product teams</span>
-        <a href="https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf" className="notification-bar__btn" rel="noopener noreferrer">List of episodes</a>
+        <div className="row">
+          <span>Design of AI podcast: The podcast for product teams</span>
+          <a href="https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf" className="btn--small" rel="noopener noreferrer">List of episodes</a>
+        </div>
       </section>
 
       <header className="header active-scroll--notification-bar">
