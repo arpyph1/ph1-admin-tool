@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import Header from '@/app/components/Header';
+import Header from '../../components/Header';
 
 // Force dynamic rendering for proper SEO indexing
 export const dynamic = 'force-dynamic';
