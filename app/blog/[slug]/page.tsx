@@ -5,47 +5,77 @@ import { createClient } from 'contentful';
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
 
-function renderRichText(content: any): string {
-  if (!content || !content.content) return '';
+function renderRichTextNode(node: any): string {
+  if (!node) return '';
 
-  return content.content.map((node: any) => {
-    if (node.nodeType === 'paragraph') {
-      const text = node.content?.map((c: any) => {
-        let value = c.value || '';
-        if (c.marks) {
-          c.marks.forEach((mark: any) => {
-            if (mark.type === 'bold') value = `<strong>${value}</strong>`;
-            if (mark.type === 'italic') value = `<em>${value}</em>`;
-          });
+  // Handle text nodes
+  if (node.nodeType === 'text') {
+    let value = node.value || '';
+    if (node.marks) {
+      node.marks.forEach((mark: any) => {
+        if (mark.type === 'bold') value = `<strong>${value}</strong>`;
+        if (mark.type === 'italic') value = `<em>${value}</em>`;
+        if (mark.type === 'underline') value = `<u>${value}</u>`;
+        if (mark.type === 'code') value = `<code class="bg-gray-100 px-1 rounded">${value}</code>`;
+      });
+    }
+    return value;
+  }
+
+  // Handle hyperlinks
+  if (node.nodeType === 'hyperlink') {
+    const url = node.data?.uri || '#';
+    const text = node.content?.map((c: any) => renderRichTextNode(c)).join('') || '';
+    return `<a href="${url}" class="text-blue-600 hover:underline" target="_blank" rel="noopener">${text}</a>`;
+  }
+
+  // Get inner content
+  const innerContent = node.content?.map((c: any) => renderRichTextNode(c)).join('') || '';
+
+  switch (node.nodeType) {
+    case 'document':
+      return innerContent;
+    case 'paragraph':
+      return `<p class="mb-4 leading-relaxed">${innerContent}</p>`;
+    case 'heading-1':
+      return `<h1 class="text-4xl font-bold mt-10 mb-6">${innerContent}</h1>`;
+    case 'heading-2':
+      return `<h2 class="text-3xl font-bold mt-8 mb-4">${innerContent}</h2>`;
+    case 'heading-3':
+      return `<h3 class="text-2xl font-bold mt-6 mb-3">${innerContent}</h3>`;
+    case 'heading-4':
+      return `<h4 class="text-xl font-bold mt-5 mb-2">${innerContent}</h4>`;
+    case 'heading-5':
+      return `<h5 class="text-lg font-bold mt-4 mb-2">${innerContent}</h5>`;
+    case 'heading-6':
+      return `<h6 class="text-base font-bold mt-4 mb-2">${innerContent}</h6>`;
+    case 'unordered-list':
+      return `<ul class="list-disc list-outside ml-6 mb-4 space-y-2">${innerContent}</ul>`;
+    case 'ordered-list':
+      return `<ol class="list-decimal list-outside ml-6 mb-4 space-y-2">${innerContent}</ol>`;
+    case 'list-item':
+      const listItemContent = node.content?.map((c: any) => {
+        if (c.nodeType === 'paragraph') {
+          return c.content?.map((cc: any) => renderRichTextNode(cc)).join('') || '';
         }
-        return value;
+        return renderRichTextNode(c);
       }).join('') || '';
-      return `<p class="mb-4">${text}</p>`;
-    }
-    if (node.nodeType === 'heading-2') {
-      const text = node.content?.map((c: any) => c.value || '').join('') || '';
-      return `<h2 class="text-3xl font-bold mt-8 mb-4">${text}</h2>`;
-    }
-    if (node.nodeType === 'heading-3') {
-      const text = node.content?.map((c: any) => c.value || '').join('') || '';
-      return `<h3 class="text-2xl font-bold mt-6 mb-3">${text}</h3>`;
-    }
-    if (node.nodeType === 'unordered-list') {
-      const items = node.content?.map((item: any) => {
-        const text = item.content?.[0]?.content?.map((c: any) => c.value || '').join('') || '';
-        return `<li class="ml-4">${text}</li>`;
-      }).join('') || '';
-      return `<ul class="list-disc list-inside mb-4">${items}</ul>`;
-    }
-    if (node.nodeType === 'ordered-list') {
-      const items = node.content?.map((item: any) => {
-        const text = item.content?.[0]?.content?.map((c: any) => c.value || '').join('') || '';
-        return `<li class="ml-4">${text}</li>`;
-      }).join('') || '';
-      return `<ol class="list-decimal list-inside mb-4">${items}</ol>`;
-    }
-    return '';
-  }).join('');
+      return `<li>${listItemContent}</li>`;
+    case 'blockquote':
+      return `<blockquote class="border-l-4 border-gray-300 pl-4 italic my-4">${innerContent}</blockquote>`;
+    case 'hr':
+      return `<hr class="my-8 border-gray-200" />`;
+    case 'embedded-entry-block':
+    case 'embedded-asset-block':
+      return ''; // Skip embedded entries for now
+    default:
+      return innerContent;
+  }
+}
+
+function renderRichText(content: any): string {
+  if (!content) return '';
+  return renderRichTextNode(content);
 }
 
 // Lazy client initialization
