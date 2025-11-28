@@ -185,24 +185,16 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   const fields = post.fields as any;
 
-  // DEBUG: Check trendContentRich field
-  console.log('=== BLOG DEBUG ===');
-  console.log('Fields available:', Object.keys(fields || {}));
-  console.log('trendContentRich exists:', !!fields?.trendContentRich);
-  console.log('trendContentRich nodeType:', fields?.trendContentRich?.nodeType);
-  console.log('trendContentRich content length:', fields?.trendContentRich?.content?.length);
-  console.log('summaryRich exists:', !!fields?.summaryRich);
-  console.log('=== END DEBUG ===');
-
   const title = fields?.title || 'Blog Post';
   const subtitle = fields?.subtitle || fields?.heroSubheadline || '';
   const author = fields?.author || '';
   const publishedDate = fields?.publishedDate || post.sys?.createdAt;
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
 
-  // Get content from trendContentRich (full body) with fallback to summaryRich (preview)
-  const content = fields?.trendContentRich || fields?.summaryRich || null;
-  const renderedContent = content ? renderRichText(content) : '';
+  // Render both summary (intro) and full body content
+  const summaryContent = fields?.summaryRich ? renderRichText(fields.summaryRich) : '';
+  const bodyContent = fields?.trendContentRich ? renderRichText(fields.trendContentRich) : '';
+  const renderedContent = summaryContent + bodyContent;
 
   // Format date for display
   const formattedDate = publishedDate
