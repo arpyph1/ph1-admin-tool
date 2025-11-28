@@ -5,6 +5,49 @@ import { createClient } from 'contentful';
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
 
+function renderRichText(content: any): string {
+  if (!content || !content.content) return '';
+
+  return content.content.map((node: any) => {
+    if (node.nodeType === 'paragraph') {
+      const text = node.content?.map((c: any) => {
+        let value = c.value || '';
+        if (c.marks) {
+          c.marks.forEach((mark: any) => {
+            if (mark.type === 'bold') value = `<strong>${value}</strong>`;
+            if (mark.type === 'italic') value = `<em>${value}</em>`;
+          });
+        }
+        return value;
+      }).join('') || '';
+      return `<p class="mb-4">${text}</p>`;
+    }
+    if (node.nodeType === 'heading-2') {
+      const text = node.content?.map((c: any) => c.value || '').join('') || '';
+      return `<h2 class="text-3xl font-bold mt-8 mb-4">${text}</h2>`;
+    }
+    if (node.nodeType === 'heading-3') {
+      const text = node.content?.map((c: any) => c.value || '').join('') || '';
+      return `<h3 class="text-2xl font-bold mt-6 mb-3">${text}</h3>`;
+    }
+    if (node.nodeType === 'unordered-list') {
+      const items = node.content?.map((item: any) => {
+        const text = item.content?.[0]?.content?.map((c: any) => c.value || '').join('') || '';
+        return `<li class="ml-4">${text}</li>`;
+      }).join('') || '';
+      return `<ul class="list-disc list-inside mb-4">${items}</ul>`;
+    }
+    if (node.nodeType === 'ordered-list') {
+      const items = node.content?.map((item: any) => {
+        const text = item.content?.[0]?.content?.map((c: any) => c.value || '').join('') || '';
+        return `<li class="ml-4">${text}</li>`;
+      }).join('') || '';
+      return `<ol class="list-decimal list-inside mb-4">${items}</ol>`;
+    }
+    return '';
+  }).join('');
+}
+
 // Lazy client initialization
 let client: ReturnType<typeof createClient> | null = null;
 
@@ -112,8 +155,14 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   const fields = post.fields as any;
   const title = fields?.title || 'Blog Post';
+  const subtitle = fields?.subtitle || fields?.heroSubheadline || '';
+  const author = fields?.author || '';
   const publishedDate = fields?.publishedDate || post.sys?.createdAt;
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
+
+  // Get content from summaryRich or body field
+  const content = fields?.summaryRich || fields?.body || fields?.content || null;
+  const renderedContent = content ? renderRichText(content) : '';
 
   // Format date for display
   const formattedDate = publishedDate
@@ -139,26 +188,41 @@ export default async function BlogPage({ params }: { params: { slug: string } })
             <img src="/images/logo.svg" alt="PH1.ca" className="h-10" />
           </a>
           <nav className="flex gap-8 items-center">
-            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Services</a>
-            <a href="#work" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Our Work</a>
-            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Training</a>
-            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">About</a>
-            <a href="#contact" className="bg-[#ffc72d] px-5 py-2 font-bold text-sm text-black hover:bg-[#fab700] transition-colors">Contact</a>
+            <a href="/" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Services</a>
+            <a href="/#work" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Our Work</a>
+            <a href="/" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Training</a>
+            <a href="/" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">About</a>
+            <a href="/#contact" className="bg-[#ffc72d] px-5 py-2 font-bold text-sm text-black hover:bg-[#fab700] transition-colors">Contact</a>
           </nav>
         </div>
       </header>
 
-      <article className="max-w-4xl mx-auto px-4 py-20">
-        {imageUrl && (
-          <div className="mb-12">
-            <img src={imageUrl} alt={title} className="w-full h-96 object-cover rounded-lg" />
+      {imageUrl && (
+        <div className="w-full h-[500px] relative">
+          <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
+            <div className="max-w-4xl mx-auto px-4 pb-12 w-full">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{title}</h1>
+              {subtitle && <p className="text-xl text-white/80">{subtitle}</p>}
+            </div>
           </div>
+        </div>
+      )}
+
+      <article className="max-w-4xl mx-auto px-4 py-12">
+        <div className="flex items-center gap-4 mb-8 text-gray-600">
+          {author && <span className="font-medium">{author}</span>}
+          {author && formattedDate && <span>•</span>}
+          {formattedDate && <time>{formattedDate}</time>}
+        </div>
+
+        {!imageUrl && <h1 className="text-5xl font-bold mb-8">{title}</h1>}
+
+        {renderedContent ? (
+          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: renderedContent }} />
+        ) : (
+          <p className="text-xl text-gray-600">Content coming soon.</p>
         )}
-        {formattedDate && (
-          <time className="text-sm text-gray-500 mb-4 block">{formattedDate}</time>
-        )}
-        <h1 className="text-5xl font-bold mb-8">{title}</h1>
-        <p className="text-xl text-gray-600">This is a blog post page. Full content coming soon.</p>
       </article>
     </main>
   );
