@@ -1,18 +1,26 @@
 import Header from './components/Header';
 
+// Force dynamic rendering - homepage fetches fresh data from Contentful
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
+
 async function getCaseStudies() {
   try {
     const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
-    const res = await fetch(`https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=caseStudy&order=-sys.createdAt&limit=6&include=2&access_token=${token}`, { cache: 'no-store' });
+    if (!token) {
+      console.error('Error fetching case studies: Missing Contentful access token');
+      return [];
+    }
+    const res = await fetch(`https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=caseStudy&order=-sys.createdAt&limit=6&include=2&access_token=${token}`, { next: { revalidate: 3600 } });
     const data = await res.json();
-    
+
     const assetMap: any = {};
     if (data.includes?.Asset) {
       data.includes.Asset.forEach((asset: any) => {
         assetMap[asset.sys.id] = asset.fields?.file?.url;
       });
     }
-    
+
     return data.items?.map((item: any) => {
       const fields = item.fields;
       return {
@@ -24,7 +32,9 @@ async function getCaseStudies() {
       };
     }) || [];
   } catch (error) {
-    console.error('Error fetching case studies:', error);
+    // Sanitize error to avoid exposing tokens in logs
+    const safeError = error instanceof Error ? error.message.replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]') : 'Unknown error';
+    console.error('Error fetching case studies:', safeError);
     return [];
   }
 }
