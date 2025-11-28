@@ -228,12 +228,12 @@ export default async function BlogPage({ params }: { params: { slug: string } })
             <a href="/training" className="header__nav-item">
               <span className="header__nav-item-span">Training</span>
             </a>
-            <a href="/agency" className="header__nav-item">
-              <span className="header__nav-item-span">About</span>
-            </a>
           </div>
         </nav>
         <div className="header__side-section">
+          <a href="/agency" className="header__nav-item">
+            <span className="header__nav-item-span">About</span>
+          </a>
           <a href="/contact" className="header__nav-sm header__nav-sm--media">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
               <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
