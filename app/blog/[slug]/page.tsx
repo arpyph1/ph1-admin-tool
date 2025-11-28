@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import Header from '../../components/Header';
 
 // Force dynamic rendering for proper SEO indexing
 export const dynamic = 'force-dynamic';
@@ -8,85 +7,11 @@ export const dynamic = 'force-dynamic';
 const BASE_URL = 'https://ph1.ca';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
 
-function renderRichTextNode(node: any): string {
-  if (!node) return '';
-
-  // Handle text nodes
-  if (node.nodeType === 'text') {
-    let value = node.value || '';
-    if (node.marks) {
-      node.marks.forEach((mark: any) => {
-        if (mark.type === 'bold') value = `<strong>${value}</strong>`;
-        if (mark.type === 'italic') value = `<em>${value}</em>`;
-        if (mark.type === 'underline') value = `<u>${value}</u>`;
-        if (mark.type === 'code') value = `<code class="bg-gray-100 px-1 rounded">${value}</code>`;
-      });
-    }
-    return value;
-  }
-
-  // Handle hyperlinks
-  if (node.nodeType === 'hyperlink') {
-    const url = node.data?.uri || '#';
-    const text = node.content?.map((c: any) => renderRichTextNode(c)).join('') || '';
-    return `<a href="${url}" class="text-blue-600 hover:underline" target="_blank" rel="noopener">${text}</a>`;
-  }
-
-  // Get inner content
-  const innerContent = node.content?.map((c: any) => renderRichTextNode(c)).join('') || '';
-
-  switch (node.nodeType) {
-    case 'document':
-      return innerContent;
-    case 'paragraph':
-      return `<p class="mb-4 leading-relaxed">${innerContent}</p>`;
-    case 'heading-1':
-      return `<h1 class="text-4xl font-bold mt-10 mb-6">${innerContent}</h1>`;
-    case 'heading-2':
-      return `<h2 class="text-3xl font-bold mt-8 mb-4">${innerContent}</h2>`;
-    case 'heading-3':
-      return `<h3 class="text-2xl font-bold mt-6 mb-3">${innerContent}</h3>`;
-    case 'heading-4':
-      return `<h4 class="text-xl font-bold mt-5 mb-2">${innerContent}</h4>`;
-    case 'heading-5':
-      return `<h5 class="text-lg font-bold mt-4 mb-2">${innerContent}</h5>`;
-    case 'heading-6':
-      return `<h6 class="text-base font-bold mt-4 mb-2">${innerContent}</h6>`;
-    case 'unordered-list':
-      return `<ul class="list-disc list-outside ml-6 mb-4 space-y-2">${innerContent}</ul>`;
-    case 'ordered-list':
-      return `<ol class="list-decimal list-outside ml-6 mb-4 space-y-2">${innerContent}</ol>`;
-    case 'list-item':
-      const listItemContent = node.content?.map((c: any) => {
-        if (c.nodeType === 'paragraph') {
-          return c.content?.map((cc: any) => renderRichTextNode(cc)).join('') || '';
-        }
-        return renderRichTextNode(c);
-      }).join('') || '';
-      return `<li>${listItemContent}</li>`;
-    case 'blockquote':
-      return `<blockquote class="border-l-4 border-gray-300 pl-4 italic my-4">${innerContent}</blockquote>`;
-    case 'hr':
-      return `<hr class="my-8 border-gray-200" />`;
-    case 'embedded-entry-block':
-    case 'embedded-asset-block':
-      return ''; // Skip embedded entries for now
-    default:
-      return innerContent;
-  }
-}
-
-function renderRichText(content: any): string {
-  if (!content) return '';
-  return renderRichTextNode(content);
-}
-
 async function getBlogPost(slug: string) {
   try {
     const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
-    // Query by 'key' field (the slug field for trends content type)
     const res = await fetch(
-      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&fields.key=${slug}&include=2&limit=1&access_token=${token}`,
+      `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&fields.urlKey=${slug}&include=2&access_token=${token}`,
       { cache: 'no-store' }
     );
     const data = await res.json();
@@ -94,9 +19,7 @@ async function getBlogPost(slug: string) {
     if (!data.items || data.items.length === 0) return null;
 
     const item = data.items[0];
-
-    // Build asset map for resolving images
-    const assetMap: Record<string, string> = {};
+    const assetMap: any = {};
     if (data.includes?.Asset) {
       data.includes.Asset.forEach((asset: any) => {
         assetMap[asset.sys.id] = asset.fields?.file?.url;
@@ -105,7 +28,6 @@ async function getBlogPost(slug: string) {
 
     const heroImageId = item.fields?.heroImage?.sys?.id;
     const seoOgImageId = item.fields?.seoOgImage?.sys?.id;
-
     return {
       ...item,
       resolvedHeroImage: heroImageId ? assetMap[heroImageId] : null,
@@ -183,97 +105,42 @@ export default async function BlogPage({ params }: { params: { slug: string } })
 
   if (!post) notFound();
 
-  const fields = post.fields as any;
-
-  const title = fields?.title || 'Blog Post';
-  const subtitle = fields?.subtitle || fields?.heroSubheadline || '';
-  const author = fields?.author || '';
-  const publishedDate = fields?.publishedDate || post.sys?.createdAt;
+  const title = post.fields?.title || 'Blog Post';
   const imageUrl = post.resolvedHeroImage ? `https:${post.resolvedHeroImage}` : null;
-
-  // Render both summary (intro) and full body content
-  const summaryContent = fields?.summaryRich ? renderRichText(fields.summaryRich) : '';
-  const bodyContent = fields?.trendContentRich ? renderRichText(fields.trendContentRich) : '';
-  const renderedContent = summaryContent + bodyContent;
-
-  // Format date for display
-  const formattedDate = publishedDate
-    ? new Date(publishedDate).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
-    : null;
 
   return (
     <main className="bg-white min-h-screen">
-      <Header />
+      <section className="notification-bar">
+        <div className="max-w-7xl mx-auto px-4 flex justify-center items-center gap-4">
+          <span className="text-sm">Design of AI podcast: The podcast for product teams</span>
+          <a href="https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf" className="bg-[#ffc72d] text-black px-3 py-1.5 font-bold text-xs hover:bg-[#fab700]">List of episodes</a>
+        </div>
+      </section>
 
-      {imageUrl && (
-        <div className="w-full h-[500px] relative">
-          <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
-            <div className="max-w-4xl mx-auto px-4 pb-12 w-full">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{title}</h1>
-              {subtitle && <p className="text-xl text-white/80">{subtitle}</p>}
-            </div>
+      <header className="header">
+        <div className="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
+          <a href="/" className="flex items-center">
+            <img src="/images/logo.svg" alt="PH1.ca" className="h-10" />
+          </a>
+          <nav className="flex gap-8 items-center">
+            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Services</a>
+            <a href="#work" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Our Work</a>
+            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">Training</a>
+            <a href="#" className="font-normal text-sm text-black hover:text-[#51c2e7] transition-colors">About</a>
+            <a href="#contact" className="bg-[#ffc72d] px-5 py-2 font-bold text-sm text-black hover:bg-[#fab700] transition-colors">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <div className="max-w-4xl mx-auto px-4 py-20">
+        {imageUrl && (
+          <div className="mb-12">
+            <img src={imageUrl} alt={title} className="w-full h-96 object-cover rounded-lg" />
           </div>
-        </div>
-      )}
-
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        <div className="flex items-center gap-4 mb-8 text-gray-600">
-          {author && <span className="font-medium">{author}</span>}
-          {author && formattedDate && <span>•</span>}
-          {formattedDate && <time>{formattedDate}</time>}
-        </div>
-
-        {!imageUrl && <h1 className="text-5xl font-bold mb-8">{title}</h1>}
-
-        {renderedContent ? (
-          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: renderedContent }} />
-        ) : (
-          <p className="text-xl text-gray-600">Content coming soon.</p>
         )}
-      </article>
-
-      <footer>
-        <article className="row footer-top-row">
-          <h3 className="footer__header">PH1 RESEARCH INC.</h3>
-          <hr className="footer__hr" />
-
-          <div className="column one-third">
-            <span className="footer__text">
-              1863 Alberni Street #703<br />
-              Vancouver, BC<br />
-              <br />
-              info@ph1.ca<br />
-              (604) 373-3213
-            </span>
-          </div>
-          <div className="column one-third">
-            <span>
-              <a className="link link--block footer__link" href="/services/cx/customer-experience-audits">CX Research & Strategy</a>
-              <a className="link link--block footer__link" href="/user-experience">Usability & Accessibility Testing</a>
-            </span>
-          </div>
-          <div className="column one-third">
-            <span>
-              <a className="link link--block footer__link" href="/">Home</a>
-              <a className="link link--block footer__link" href="/contact">Contact us</a>
-              <a className="link link--block footer__link" href="/agency">Agency</a>
-              <a className="link link--block footer__link" href="/clients">Clients</a>
-            </span>
-          </div>
-        </article>
-        <div className="footer-bottom-row">
-          <div className="row">
-            <div className="column whole">
-              <span className="footer__text">© 2026 PH1 Research Inc.</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+        <h1 className="text-5xl font-bold mb-8">{title}</h1>
+        <p className="text-xl text-gray-600">This is a blog post page. Full content coming soon.</p>
+      </div>
     </main>
   );
 }
