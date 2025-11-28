@@ -184,6 +184,16 @@ export default async function BlogPage({ params }: { params: { slug: string } })
   if (!post) notFound();
 
   const fields = post.fields as any;
+
+  // DEBUG: Log all available field names
+  console.log('=== BLOG POST DEBUG ===');
+  console.log('Available fields:', Object.keys(fields || {}));
+  console.log('Has trendContentRich:', !!fields?.trendContentRich);
+  console.log('Has summaryRich:', !!fields?.summaryRich);
+  console.log('Has body:', !!fields?.body);
+  console.log('Has content:', !!fields?.content);
+  console.log('=== END DEBUG ===');
+
   const title = fields?.title || 'Blog Post';
   const subtitle = fields?.subtitle || fields?.heroSubheadline || '';
   const author = fields?.author || '';
