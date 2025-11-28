@@ -1,18 +1,28 @@
 import { MetadataRoute } from 'next';
 
+// Force dynamic generation - sitemap needs fresh data from Contentful
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
+
 const BASE_URL = 'https://ph1.ca';
 
 async function getAllBlogPosts() {
   try {
     const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
+    if (!token) {
+      console.error('Error fetching blog posts for sitemap: Missing Contentful access token');
+      return [];
+    }
     const res = await fetch(
       `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=trends&order=-sys.createdAt&limit=1000&access_token=${token}`,
-      { cache: 'no-store' }
+      { next: { revalidate: 3600 } }
     );
     const data = await res.json();
     return data.items || [];
   } catch (error) {
-    console.error('Error fetching blog posts for sitemap:', error);
+    // Sanitize error to avoid exposing tokens in logs
+    const safeError = error instanceof Error ? error.message.replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]') : 'Unknown error';
+    console.error('Error fetching blog posts for sitemap:', safeError);
     return [];
   }
 }
@@ -20,14 +30,19 @@ async function getAllBlogPosts() {
 async function getAllCaseStudies() {
   try {
     const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
+    if (!token) {
+      console.error('Error fetching case studies for sitemap: Missing Contentful access token');
+      return [];
+    }
     const res = await fetch(
       `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=caseStudy&order=-sys.createdAt&limit=1000&access_token=${token}`,
-      { cache: 'no-store' }
+      { next: { revalidate: 3600 } }
     );
     const data = await res.json();
     return data.items || [];
   } catch (error) {
-    console.error('Error fetching case studies for sitemap:', error);
+    const safeError = error instanceof Error ? error.message.replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]') : 'Unknown error';
+    console.error('Error fetching case studies for sitemap:', safeError);
     return [];
   }
 }
@@ -35,14 +50,19 @@ async function getAllCaseStudies() {
 async function getAllServices() {
   try {
     const token = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
+    if (!token) {
+      console.error('Error fetching services for sitemap: Missing Contentful access token');
+      return [];
+    }
     const res = await fetch(
       `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?content_type=service&limit=1000&access_token=${token}`,
-      { cache: 'no-store' }
+      { next: { revalidate: 3600 } }
     );
     const data = await res.json();
     return data.items || [];
   } catch (error) {
-    console.error('Error fetching services for sitemap:', error);
+    const safeError = error instanceof Error ? error.message.replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]') : 'Unknown error';
+    console.error('Error fetching services for sitemap:', safeError);
     return [];
   }
 }

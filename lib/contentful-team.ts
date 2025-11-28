@@ -22,9 +22,16 @@ let client: ReturnType<typeof createClient> | null = null;
 
 function getClient() {
   if (!client) {
+    const accessToken = process.env.CONTENTFUL_DELIVERY_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
+    const spaceId = process.env.CONTENTFUL_SPACE_ID;
+
+    if (!accessToken || !spaceId) {
+      throw new Error('Contentful configuration missing: CONTENTFUL_SPACE_ID and CONTENTFUL_DELIVERY_TOKEN (or CONTENTFUL_ACCESS_TOKEN) are required');
+    }
+
     client = createClient({
-      space: process.env.CONTENTFUL_SPACE_ID!,
-      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
+      space: spaceId,
+      accessToken: accessToken,
     });
   }
   return client;
@@ -68,6 +75,14 @@ function mapTeamMember(entry: Entry<any>): TeamMember {
   };
 }
 
+// Helper to sanitize error messages (remove tokens from URLs)
+function sanitizeError(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message.replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]');
+  }
+  return String(error).replace(/access_token=[^&\s]+/g, 'access_token=[REDACTED]');
+}
+
 export async function getAllTeamMembers(): Promise<TeamMember[]> {
   try {
     const entries = await getClient().getEntries<any>({
@@ -77,7 +92,7 @@ export async function getAllTeamMembers(): Promise<TeamMember[]> {
 
     return entries.items.map(entry => mapTeamMember(entry));
   } catch (error) {
-    console.error('Error fetching team members from Contentful:', error);
+    console.error('Error fetching team members from Contentful:', sanitizeError(error));
     return [];
   }
 }
@@ -96,7 +111,7 @@ export async function getTeamMember(key: string): Promise<TeamMember | null> {
 
     return mapTeamMember(entries.items[0]);
   } catch (error) {
-    console.error(`Error fetching team member ${key}:`, error);
+    console.error(`Error fetching team member ${key}:`, sanitizeError(error));
     return null;
   }
 }
@@ -137,7 +152,7 @@ export async function getTeamMembersByExpertise(expertise: string): Promise<Team
 
     return entries.items.map(entry => mapTeamMember(entry));
   } catch (error) {
-    console.error(`Error fetching team members by expertise ${expertise}:`, error);
+    console.error(`Error fetching team members by expertise ${expertise}:`, sanitizeError(error));
     return [];
   }
 }
